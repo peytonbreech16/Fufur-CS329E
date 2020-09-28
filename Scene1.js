@@ -93,34 +93,34 @@ class Scene1 extends Phaser.Scene
         // Furfur animations
         this.anims.create({
             key: 'furfur_left',
-            frames: [{key: 'furfur', frame:1}],
+            frames: [{key: 'furfur', frame:0}],
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
             key: 'turn',
-            frames: [{key: 'furfur', frame:2}],
+            frames: [{key: 'furfur', frame:1}],
             frameRate: 20
         });
 
         this.anims.create({
             key: 'furfur_right',
-            frames: [{key: 'furfur', frame:1}],
+            frames: [{key: 'furfur', frame:0}],
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
             key: 'furfur_up',
-            frames: [{key: 'furfur', frame:3}],
+            frames: [{key: 'furfur', frame:2}],
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
             key: 'furfur_down',
-            frames: [{key: 'furfur', frame:4}],
+            frames: [{key: 'furfur', frame:1}],
             frameRate: 10,
             repeat: -1
         });
@@ -164,26 +164,26 @@ class Scene1 extends Phaser.Scene
         }
 
         // furfur movement
-        if (furfur.x > player.x)
+        if (furfur.x > player.x+5)
         {
             furfur.x -= 2.3;
             furfur.anims.play('furfur_left');
             furfur.flipX = false;
         }
 
-        else if (furfur.x < player.x)
+        else if (furfur.x < player.x-5)
         {
             furfur.x += 2.3;
             furfur.anims.play('furfur_right');
             furfur.flipX = true;
         }
 
-        if (furfur.y > player.y)
+        if (furfur.y > player.y+5)
         {
             furfur.y -= 2.3;
             furfur.anims.play('furfur_up');
         }
-        else if (furfur.y < player.y)
+        else if (furfur.y < player.y-5)
         {
             furfur.y += 2.3;
             furfur.anims.play('furfur_down');
