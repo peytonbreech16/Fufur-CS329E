@@ -1,21 +1,34 @@
 var player;
+var furfur;
 var cursors;
 var wasd;
 var gameOver = false;
 
-class Scene1 extends Phaser.Scene {
-    constructor() {
+class Scene1 extends Phaser.Scene 
+{
+    constructor() 
+    {
         super("Scene1");
     }
 
 
-    preload() {
+    preload() 
+    {
         this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('furfur', 'assets/furfur.png', { frameWidth: 288, frameHeight: 372 });
     }
 
-    create () {
+    create () 
+    {
         // The player and its settings
         player = this.physics.add.sprite(100, 450, 'dude');
+
+        //The enemy (furfur) and its settings
+        furfur = this.physics.add.sprite(400, 450, 'furfur');
+
+        //Add collider for player and furfur and when they touch each other
+        this.physics.add.collider(player, furfur);
+        this.physics.add.overlap(player, furfur, this.startOver, null, this);
 
         //  Player physics properties. Give the little guy a slight bounce.
         player.setBounce(0.2);
@@ -49,12 +62,10 @@ class Scene1 extends Phaser.Scene {
             left:Phaser.Input.Keyboard.KeyCodes.A,
             down:Phaser.Input.Keyboard.KeyCodes.S,
             right:Phaser.Input.Keyboard.KeyCodes.D});
-
-        
     }
 
-    update() {
-
+    update() 
+    {
         if (cursors.left.isDown || wasd.left.isDown)
         {
             player.setVelocityX(-300);
@@ -89,6 +100,30 @@ class Scene1 extends Phaser.Scene {
             player.setVelocityY(0);
         }
         
-    };
+        if (furfur.y > player.y)
+        {
+            furfur.y -= 3;
+        }
+        else if (furfur.y < player.y)
+        {
+            furfur.y += 3;
+        }
+
+        if (furfur.x > player.x)
+        {
+            furfur.x -= 3;
+        }
+        
+        else if (furfur.x < player.x)
+        {
+            furfur.x += 3;
+        }       
+    }
+
+    startOver(player, furfur)
+    {
+        furfur.disableBody(true,true);
+        this.scene.restart();
+    }
 };
 
