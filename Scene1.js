@@ -34,18 +34,18 @@ class Scene1 extends Phaser.Scene
 
         // add trees
         trees = this.physics.add.staticGroup();
-        trees.create(10,52,'tallTree').setScale(1.5).refreshBody();
-        trees.create(138,52,'tallTree').setScale(1.5).refreshBody();
-        trees.create(243,52,'tallTree').setScale(1.5).refreshBody();
-        trees.create(370,52,'tallTree').setScale(1.5).refreshBody();
-        trees.create(523,52,'tallTree').setScale(1.5).refreshBody();
-        trees.create(600,52,'tallTree').setScale(1.5).refreshBody();
-        trees.create(689,52,'tallTree').setScale(1.5).refreshBody();
-        trees.create(780,52,'tallTree').setScale(1.5).refreshBody();
-        trees.create(400,300,'wideTree').setScale(1.5).refreshBody();
-        trees.create(78,250,'tallTree').setScale(1.5).refreshBody();
-        trees.create(175,450,'tallTree').setScale(1.5).refreshBody();
-        trees.create(740,350,'tallTree').setScale(1.5).refreshBody();
+        trees.create(10,52,'tallTree');
+        trees.create(138,52,'tallTree');
+        trees.create(243,52,'tallTree');
+        trees.create(370,52,'tallTree');
+        trees.create(523,52,'tallTree');
+        trees.create(600,52,'tallTree');
+        trees.create(689,52,'tallTree');
+        trees.create(780,52,'tallTree');
+        trees.create(400,300,'wideTree');
+        trees.create(78,250,'tallTree');
+        trees.create(175,450,'tallTree');
+        trees.create(740,350,'tallTree');
 
         // The player and its settings
         player = this.physics.add.sprite(600, 550, 'dude');
