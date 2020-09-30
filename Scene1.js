@@ -20,6 +20,7 @@ class Scene1 extends Phaser.Scene
         this.load.image('ground','assets/ground.png');
         this.load.image('tallTree','assets/tallTree.png');
         this.load.image('wideTree','assets/wideTree.png');
+        this.load.audio('BackgroundMusic',['assets/BackgroundMusic2.mp3']);
     }
 
     create ()
@@ -28,6 +29,8 @@ class Scene1 extends Phaser.Scene
         var background = this.add.image(400,350,'ground');
         background.displayWidth = game.config.width * 1;
         background.scaleY = background.scaleX;
+        this.backgroundMusic = this.sound.add('BackgroundMusic');
+        this.backgroundMusic.play();
 
         // add trees
         trees = this.physics.add.staticGroup();
