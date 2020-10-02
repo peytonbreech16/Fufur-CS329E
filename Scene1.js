@@ -131,6 +131,9 @@ class Scene1 extends Phaser.Scene
 
     update()
     {
+        player.setVelocityX(0);
+        player.setVelocityY(0);
+
         // player movement
         if (cursors.left.isDown || wasd.left.isDown)
         {
@@ -144,14 +147,7 @@ class Scene1 extends Phaser.Scene
 
             player.anims.play('right', true);
         }
-        else
-        {
-            player.setVelocityX(0);
-
-            player.anims.play('turn');
-        }
-
-        if (cursors.up.isDown || wasd.up.isDown)
+        else if (cursors.up.isDown || wasd.up.isDown)
         {
             player.setFriction(0, 1);
             player.setVelocityY(-250);
@@ -163,9 +159,10 @@ class Scene1 extends Phaser.Scene
         }
         else
         {
-            player.setVelocityY(0);
+            player.anims.play('turn');
         }
 
+        
         // furfur movement
         if (furfur.x > player.x+5)
         {
