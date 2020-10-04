@@ -4,6 +4,9 @@ var cursors;
 var wasd;
 var gameOver = false;
 var trees;
+var puzzlePieces;
+var collectedPieces = 0;
+var scoreText;
 
 class Scene1 extends Phaser.Scene
 {
@@ -21,6 +24,7 @@ class Scene1 extends Phaser.Scene
         this.load.image('tallTree','assets/tallTree.png');
         this.load.image('wideTree','assets/wideTree.png');
         this.load.audio('BackgroundMusic',['assets/BackgroundMusic2.mp3']);
+        this.load.image('puzzle1', 'assets/tempPickUp.png');
     }
 
     create ()
@@ -34,6 +38,7 @@ class Scene1 extends Phaser.Scene
 
         // add trees
         trees = this.physics.add.staticGroup();
+        puzzlePieces = this.physics.add.staticGroup();
         trees.create(10,52,'tallTree');
         trees.create(138,52,'tallTree');
         trees.create(243,52,'tallTree');
@@ -47,6 +52,11 @@ class Scene1 extends Phaser.Scene
         trees.create(175,450,'tallTree');
         trees.create(740,350,'tallTree');
 
+        //puzzle pieces
+        puzzlePieces.create(600,400,'puzzle1');
+        puzzlePieces.create(600,300,'puzzle1');
+        puzzlePieces.create(600,200,'puzzle1');
+
         // The player and its settings
         player = this.physics.add.sprite(600, 550, 'dude');
 
@@ -57,12 +67,17 @@ class Scene1 extends Phaser.Scene
         this.physics.add.collider(player, furfur);
         this.physics.add.overlap(player, furfur, this.startOver, null, this);
 
-        //  Player and furfur physics properties. Give the little guy a slight bounce.
+        //  Player and furfur physics properties. Give the little guy a slight bounce. 
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
+        furfur.setCollideWorldBounds(true);
         this.physics.add.collider(player, trees);
 
-        furfur.setCollideWorldBounds(true);
+        //Player touching puzzle pieces
+        this.physics.add.overlap(player, puzzlePieces, this.pickUpPiece, null, this);
+
+        //Text for showing how many puzzle pieces collected
+        scoreText = this.add.text(16, 16, 'Pieces Collected: 0', { fontSize: '32px', fill: '#ff0' });
 
         //  Our player animations, turning, walking left and walking right.
         this.anims.create({
@@ -193,7 +208,16 @@ class Scene1 extends Phaser.Scene
 
     startOver(player, furfur)
     {
-        furfur.disableBody(true,true);
+        //furfur.disableBody(true,true);
         this.scene.restart();
+        this.backgroundMusic.stop();
+        collectedPieces = 0;
+    }
+
+    pickUpPiece(player, puzzlePieces)
+    {
+        puzzlePieces.destroy();
+        collectedPieces++;
+        scoreText.setText('Pieces Collected: ' + collectedPieces);
     }
 };
