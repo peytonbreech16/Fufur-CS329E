@@ -40,13 +40,13 @@ class Scene1 extends Phaser.Scene
 
     preload()
     {
-        this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('dude', 'assets/player.png', { frameWidth: 64, frameHeight: 64 });
         this.load.spritesheet('furfur', 'assets/furfur.png', { frameWidth: 90, frameHeight: 117 });
         this.load.image('ground','assets/ground.png');
         this.load.image('tallTree','assets/tallTree.png');
         this.load.image('wideTree','assets/wideTree.png');
         this.load.audio('BackgroundMusic',['assets/BackgroundMusic2.mp3']);
-        this.load.image('puzzle1', 'assets/tempPickUp.png');
+        this.load.image('salt', 'assets/salt.png');
     }
 
     create()
@@ -80,9 +80,9 @@ class Scene1 extends Phaser.Scene
         trees.create(725,525,'tallTree');
 
         //puzzle pieces
-        puzzlePieces.create(600,400,'puzzle1');
-        puzzlePieces.create(600,300,'puzzle1');
-        puzzlePieces.create(600,200,'puzzle1');
+        puzzlePieces.create(600,400,'salt');
+        puzzlePieces.create(600,300,'salt');
+        puzzlePieces.create(600,200,'salt');
 
         // The player and its settings
         player = this.physics.add.sprite(this.playerSpawnX, this.playerSpawnY, 'dude');
@@ -94,7 +94,7 @@ class Scene1 extends Phaser.Scene
         this.physics.add.collider(player, furfur);
         this.physics.add.overlap(player, furfur, this.startOver, null, this);
 
-        //  Player and furfur physics properties. Give the little guy a slight bounce. 
+        //  Player and furfur physics properties. Give the little guy a slight bounce.
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
         furfur.setCollideWorldBounds(true);
@@ -116,13 +116,27 @@ class Scene1 extends Phaser.Scene
 
         this.anims.create({
             key: 'turn',
-            frames: [ { key: 'dude', frame: 4 } ],
+            frames: [ { key: 'dude', frame: 14 } ],
             frameRate: 20
         });
 
         this.anims.create({
             key: 'right',
-            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+            frames: this.anims.generateFrameNumbers('dude', { start: 8, end: 11 }),
+            frameRate: 20,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'up',
+            frames: this.anims.generateFrameNumbers('dude', { start: 4, end: 7 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'down',
+            frames: this.anims.generateFrameNumbers('dude', { start: 12, end: 15 }),
             frameRate: 10,
             repeat: -1
         });
@@ -196,7 +210,7 @@ class Scene1 extends Phaser.Scene
         playerY = player.y;
 
         movePlayer();
-        
+
         moveFurfur();
     }
 
@@ -260,15 +274,16 @@ function movePlayer()
         {
             player.setVelocityY(-250);
 
-            player.anims.play('turn');
+            player.anims.play('up', true);
         }
 
         else if (cursors.down.isDown || wasd.down.isDown)
         {
             player.setVelocityY(250);
 
-            player.anims.play('turn');
+            player.anims.play('down', true);
         }
+
         else
         {
             player.anims.play('turn');

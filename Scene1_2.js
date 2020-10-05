@@ -1,5 +1,3 @@
-var player;
-var furfur;
 var cursors;
 var wasd;
 var gameOver = false;
@@ -42,7 +40,7 @@ class Scene1_2 extends Phaser.Scene
         this.load.image('tallTree','assets/tallTree.png');
         this.load.image('wideTree','assets/wideTree.png');
         this.load.audio('BackgroundMusic',['assets/BackgroundMusic2.mp3']);
-        this.load.image('puzzle1', 'assets/tempPickUp.png');
+        this.load.image('salt', 'assets/salt.png');
     }
 
     create ()
@@ -69,9 +67,9 @@ class Scene1_2 extends Phaser.Scene
         trees.create(725,525,'tallTree');
 
         //puzzle pieces
-        puzzlePieces.create(600,400,'puzzle1');
-        puzzlePieces.create(600,300,'puzzle1');
-        puzzlePieces.create(600,200,'puzzle1');
+        puzzlePieces.create(600,400,'salt');
+        puzzlePieces.create(600,300,'salt');
+        puzzlePieces.create(600,200,'salt');
 
         // The player and its settings
         player = this.physics.add.sprite(this.playerSpawnX, this.playerSpawnY, 'dude');
@@ -83,7 +81,7 @@ class Scene1_2 extends Phaser.Scene
         this.physics.add.collider(player, furfur);
         this.physics.add.overlap(player, furfur, this.startOver, null, this);
 
-        //  Player and furfur physics properties. Give the little guy a slight bounce. 
+        //  Player and furfur physics properties. Give the little guy a slight bounce.
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
         furfur.setCollideWorldBounds(true);
@@ -95,27 +93,6 @@ class Scene1_2 extends Phaser.Scene
         //Text for showing how many puzzle pieces collected
         scoreText = this.add.text(16, 16, 'Pieces Collected: 0', { fontSize: '32px', fill: '#ff0' });
 
-        //  Our player animations, turning, walking left and walking right.
-        this.anims.create({
-            key: 'left',
-            frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'turn',
-            frames: [ { key: 'dude', frame: 4 } ],
-            frameRate: 20
-        });
-
-        this.anims.create({
-            key: 'right',
-            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-            frameRate: 10,
-            repeat: -1
-        });
-
         //  Input Events
         cursors = this.input.keyboard.createCursorKeys();
         wasd = this.input.keyboard.addKeys(
@@ -123,41 +100,6 @@ class Scene1_2 extends Phaser.Scene
             left:Phaser.Input.Keyboard.KeyCodes.A,
             down:Phaser.Input.Keyboard.KeyCodes.S,
             right:Phaser.Input.Keyboard.KeyCodes.D});
-
-        // Furfur animations
-        this.anims.create({
-            key: 'furfur_left',
-            frames: [{key: 'furfur', frame:0}],
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'turn',
-            frames: [{key: 'furfur', frame:1}],
-            frameRate: 20
-        });
-
-        this.anims.create({
-            key: 'furfur_right',
-            frames: [{key: 'furfur', frame:0}],
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'furfur_up',
-            frames: [{key: 'furfur', frame:2}],
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'furfur_down',
-            frames: [{key: 'furfur', frame:1}],
-            frameRate: 10,
-            repeat: -1
-        });
 
         // room change objects
 
@@ -185,8 +127,8 @@ class Scene1_2 extends Phaser.Scene
         playerY = player.y;
 
         movePlayer();
-        
-        //moveFurfur();
+
+        // moveFurfur();
     }
 
     startOver(player, furfur)
