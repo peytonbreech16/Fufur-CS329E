@@ -49,8 +49,6 @@ class Scene2_2 extends Phaser.Scene
         var background = this.add.image(400,350,'ground');
         background.displayWidth = game.config.width * 1;
         background.scaleY = background.scaleX;
-        this.backgroundMusic = this.sound.add('BackgroundMusic');
-        this.backgroundMusic.play();
 
         // add trees
         trees = this.physics.add.staticGroup();
@@ -131,6 +129,7 @@ class Scene2_2 extends Phaser.Scene
 
         movePlayer();
 
+        furfur.disableBody(true,true);
         // moveFurfur();
     }
 

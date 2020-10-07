@@ -47,6 +47,7 @@ class Scene1 extends Phaser.Scene
         this.load.image('wideTree','assets/wideTree.png');
         this.load.audio('BackgroundMusic',['assets/BackgroundMusic2.mp3']);
         this.load.image('salt', 'assets/salt.png');
+        this.load.image('medRock', 'assets/medRock.png');
     }
 
     create()
@@ -56,6 +57,7 @@ class Scene1 extends Phaser.Scene
         background.displayWidth = game.config.width * 1;
         background.scaleY = background.scaleX;
         this.backgroundMusic = this.sound.add('BackgroundMusic');
+        this.backgroundMusic.setVolume(.30);
         this.backgroundMusic.play();
 
         // add trees
@@ -73,11 +75,18 @@ class Scene1 extends Phaser.Scene
         trees.create(30,145,'tallTree');
         trees.create(25,250,'tallTree');
         trees.create(35,365,'tallTree');
-        trees.create(400,300,'wideTree');
         trees.create(25,480,'tallTree');
         trees.create(75,525,'tallTree');
         trees.create(775,480,'tallTree');
         trees.create(725,525,'tallTree');
+
+        // add rocks
+        var rocks = this.physics.add.staticGroup();
+        rocks.create(300,200,'medRock');
+        rocks.create(300,400,'medRock');
+        rocks.create(500,200,'medRock');
+        rocks.create(500,400,'medRock');
+        rocks.scaleXY(1);
 
         //puzzle pieces
         puzzlePieces.create(600,400,'salt');

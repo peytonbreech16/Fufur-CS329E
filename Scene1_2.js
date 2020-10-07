@@ -49,8 +49,6 @@ class Scene1_2 extends Phaser.Scene
         var background = this.add.image(400,350,'ground');
         background.displayWidth = game.config.width * 1;
         background.scaleY = background.scaleX;
-        this.backgroundMusic = this.sound.add('BackgroundMusic');
-        this.backgroundMusic.play();
 
         // add trees
         trees = this.physics.add.staticGroup();
@@ -65,6 +63,11 @@ class Scene1_2 extends Phaser.Scene
         trees.create(75,525,'tallTree');
         trees.create(775,480,'tallTree');
         trees.create(725,525,'tallTree');
+
+        for (var i=100; i < 700; i+=90) 
+        {
+            trees.create(i,540,'tallTree');
+        };
 
         //puzzle pieces
         puzzlePieces.create(600,400,'salt');
@@ -128,6 +131,7 @@ class Scene1_2 extends Phaser.Scene
 
         movePlayer();
 
+        furfur.disableBody(true,true);
         // moveFurfur();
     }
 

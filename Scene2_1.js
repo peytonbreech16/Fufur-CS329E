@@ -41,6 +41,7 @@ class Scene2_1 extends Phaser.Scene
         this.load.image('wideTree','assets/wideTree.png');
         this.load.audio('BackgroundMusic',['assets/BackgroundMusic2.mp3']);
         this.load.image('salt', 'assets/salt.png');
+        this.load.image('bigStump', 'assets/bigStump.png');
     }
 
     create ()
@@ -49,8 +50,6 @@ class Scene2_1 extends Phaser.Scene
         var background = this.add.image(400,350,'ground');
         background.displayWidth = game.config.width * 1;
         background.scaleY = background.scaleX;
-        this.backgroundMusic = this.sound.add('BackgroundMusic');
-        this.backgroundMusic.play();
 
         // add trees
         trees = this.physics.add.staticGroup();
@@ -66,7 +65,6 @@ class Scene2_1 extends Phaser.Scene
         trees.create(30,145,'tallTree');
         trees.create(25,250,'tallTree');
         trees.create(35,365,'tallTree');
-        trees.create(400,300,'wideTree');
         trees.create(25,480,'tallTree');
         trees.create(75,525,'tallTree');
         trees.create(775,480,'tallTree');
@@ -79,6 +77,15 @@ class Scene2_1 extends Phaser.Scene
         trees.create(600,560,'tallTree');
         trees.create(689,560,'tallTree');
         trees.create(780,560,'tallTree');
+
+        var stump1 = trees.create(140,350,'bigStump');
+        stump1.body.setCircle(30);
+        stump1.body.setOffset(25, -5);
+
+        var stump2 = trees.create(600,250,'bigStump');
+        stump2.setScale(1.25);
+        stump2.body.setCircle(50);
+        stump2.body.setOffset(10,-20);
 
         //puzzle pieces
         puzzlePieces.create(600,400,'salt');
@@ -142,6 +149,7 @@ class Scene2_1 extends Phaser.Scene
 
         movePlayer();
 
+        furfur.disableBody(true,true);
         // moveFurfur();
     }
 
