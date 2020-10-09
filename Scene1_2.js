@@ -41,6 +41,7 @@ class Scene1_2 extends Phaser.Scene
         this.load.image('wideTree','assets/wideTree.png');
         this.load.audio('BackgroundMusic',['assets/BackgroundMusic2.mp3']);
         this.load.image('salt', 'assets/salt.png');
+        this.load.image('bigStump', 'assets/bigStump.png');
     }
 
     create ()
@@ -55,10 +56,15 @@ class Scene1_2 extends Phaser.Scene
         puzzlePieces = this.physics.add.staticGroup();
         trees.create(10,52,'tallTree');
         trees.create(75,52,'tallTree');
+        trees.create(150,52,'tallTree');
+        trees.create(520,52,'tallTree');
+        trees.create(580,52,'tallTree');
+        trees.create(650,52,'tallTree');
         trees.create(725,52,'tallTree');
         trees.create(780,52,'tallTree');
         trees.create(30,145,'tallTree');
-        trees.create(400,300,'wideTree');
+        trees.create(100,145,'tallTree');
+        trees.create(480,420,'wideTree');
         trees.create(25,480,'tallTree');
         trees.create(75,525,'tallTree');
         trees.create(775,480,'tallTree');
@@ -68,6 +74,10 @@ class Scene1_2 extends Phaser.Scene
         {
             trees.create(i,540,'tallTree');
         };
+
+        var stump1 = trees.create(480,180,'bigStump');
+        stump1.body.setCircle(30);
+        stump1.body.setOffset(25, -5);
 
         //puzzle pieces
         puzzlePieces.create(600,400,'salt');
@@ -106,7 +116,7 @@ class Scene1_2 extends Phaser.Scene
 
         // room change objects
 
-        topBorder = this.add.rectangle(400,0,550,25, 0xFF0000);
+        topBorder = this.add.rectangle(350,0,325,25, 0xFF0000);
         this.physics.add.existing(topBorder);
         this.physics.add.overlap(player, topBorder, this.moveRoomUp, null, this);
 

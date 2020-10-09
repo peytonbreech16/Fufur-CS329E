@@ -57,15 +57,27 @@ class Scene2_2 extends Phaser.Scene
         trees.create(100,52,'tallTree');
         trees.create(190,52,'tallTree');
         trees.create(280,52,'tallTree');
-        trees.create(523,52,'tallTree');
         trees.create(600,52,'tallTree');
         trees.create(689,52,'tallTree');
         trees.create(780,52,'tallTree');
-        trees.create(400,300,'wideTree');
         trees.create(25,480,'tallTree');
         trees.create(75,525,'tallTree');
-        trees.create(775,480,'tallTree');
+        trees.create(610,450,'tallTree');
+        trees.create(690,450,'tallTree');
+        trees.create(775,450,'tallTree');
+        trees.create(150,525,'tallTree');
         trees.create(725,525,'tallTree');
+        trees.create(520,525,'tallTree');
+        trees.create(580,525,'tallTree');
+        trees.create(650,525,'tallTree');
+
+        var tree1 = trees.create(400,270,'wideTree');
+        tree1.body.setCircle(60);
+
+        var tree2 = trees.create(540,450,'tallTree');
+        tree2.body.setCircle(55);
+        tree2.body.setOffset(0,-3);
+
 
         //puzzle pieces
         puzzlePieces.create(600,400,'salt');
@@ -108,7 +120,7 @@ class Scene2_2 extends Phaser.Scene
         // this.physics.add.existing(topBorder);
         // this.physics.add.overlap(player, topBorder, this.moveRoomUp, null, this);
 
-        bottomBorder = this.add.rectangle(400,600,550,25, 0xFF0000);
+        bottomBorder = this.add.rectangle(350,600,325,25, 0xFF0000);
         this.physics.add.existing(bottomBorder);
         this.physics.add.overlap(player, bottomBorder, this.moveRoomDown, null, this);
 
