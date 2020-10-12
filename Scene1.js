@@ -17,6 +17,7 @@ var backgroundMusic
 var furfurSpawned = false; // is furfur chasing
 var roomsTraversed = 0; // number of rooms furfur has followed you for
 var prevRoom; // room the player was previously in
+var musicPlaying = false
 
 class Scene1 extends Phaser.Scene
 {
@@ -59,9 +60,11 @@ class Scene1 extends Phaser.Scene
         var background = this.add.image(400,350,'ground');
         background.displayWidth = game.config.width * 1;
         background.scaleY = background.scaleX;
+
+        //background music
         backgroundMusic = this.sound.add('BackgroundMusic');
         backgroundMusic.setVolume(.30);
-        backgroundMusic.play();
+        this.playMusic(backgroundMusic);
 
         // add trees
         trees = this.physics.add.staticGroup();
@@ -117,7 +120,7 @@ class Scene1 extends Phaser.Scene
         this.physics.add.overlap(player, puzzlePieces, this.pickUpPiece, null, this);
 
         //Text for showing how many puzzle pieces collected
-        scoreText = this.add.text(16, 16, 'Pieces Collected: 0', { fontSize: '32px', fill: '#ff0' });
+        scoreText = this.add.text(16, 16, 'Pieces Collected: ' + collectedPieces, { fontSize: '32px', fill: '#ff0' });
 
         //  Our player animations, turning, walking left and walking right.
         this.anims.create({
@@ -284,6 +287,16 @@ class Scene1 extends Phaser.Scene
         backgroundMusic.stop();;
         collectedPieces = 0;
         furfurSpawned = false;
+        musicPlaying = false;
+    }
+
+    playMusic(backgroundMusic)
+    {
+        if (!musicPlaying)
+        {
+            backgroundMusic.play();
+            musicPlaying = true;
+        }
     }
 
     pickUpPiece(player, puzzlePieces)

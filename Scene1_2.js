@@ -105,7 +105,7 @@ class Scene1_2 extends Phaser.Scene
         this.physics.add.overlap(player, puzzlePieces, this.pickUpPiece, null, this);
 
         //Text for showing how many puzzle pieces collected
-        scoreText = this.add.text(16, 16, 'Pieces Collected: 0', { fontSize: '32px', fill: '#ff0' });
+        scoreText = this.add.text(16, 16, 'Pieces Collected: ' + collectedPieces, { fontSize: '32px', fill: '#ff0' });
 
         //  Input Events
         cursors = this.input.keyboard.createCursorKeys();
