@@ -74,8 +74,6 @@ class Scene3_1 extends Phaser.Scene
             trees.create(i-30,345,'tallTree');
         };
 
-        
-
         trees.create(30,145,'tallTree');
         trees.create(30,250,'tallTree');
         trees.create(30,365,'tallTree');

@@ -67,7 +67,7 @@ class Scene3_2 extends Phaser.Scene
 
         for (var i=0; i <= 270; i+=90) 
         {
-            trees.create(i+5,300,'tallTree');
+            trees.create(i+5,295,'tallTree');
             trees.create(i+5,350,'tallTree');
             trees.create(i+5,400,'tallTree');
             trees.create(i+5,450,'tallTree');
