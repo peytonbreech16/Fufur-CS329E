@@ -10,7 +10,7 @@ var config = {
             debug: false
         }
     },
-    scene: [Scene1, Scene1_2, Scene2_1, Scene2_2],
+    scene: [Scene1, Scene1_2, Scene2_1, Scene2_2, Replay],
 
 
 };
