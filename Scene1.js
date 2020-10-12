@@ -402,17 +402,17 @@ function setFurfurCoord()
   {
     // x coordinate
     if (playerX >= 400){
-      furfur.x = playerX - 200;
+      furfur.x = playerX - 300;
     }
     else {
-      furfur.x = playerX + 200;
+      furfur.x = playerX + 300;
     }
 
     // y coordinate
     if (playerY >= 300){
-      furfur.y = playerY - 150;
+      furfur.y = playerY - 250;
     }
     else {
-      furfur.y = playerY + 150;
+      furfur.y = playerY + 250;
     }
   };

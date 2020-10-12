@@ -137,16 +137,10 @@ class Scene1_2 extends Phaser.Scene
             delay: 750,
             // spawn furfur
             callback: () =>{
-              if (prevRoom == 'Scene1'){
-                var x = 50;
-                var y = 300;
-                furfur = this.physics.add.sprite(x, y, 'furfur');
-              }
-              else if (prevRoom == 'Scene2_2'){
-                var x = 400;
-                var y = 50;
-                furfur = this.physics.add.sprite(x, y, 'furfur');
-              };
+              var x = this.playerSpawnX;
+              var y = this.playerSpawnY;
+              furfur = this.physics.add.sprite(x, y, 'furfur');
+              
               furfur.setActive(true).setVisible(true);
               furfur.body.enable = true;
               furfurSpawned = true;
