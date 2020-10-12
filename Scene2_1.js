@@ -88,9 +88,6 @@ class Scene2_1 extends Phaser.Scene
         stump2.body.setOffset(10,-20);
 
         //puzzle pieces
-        puzzlePieces.create(600,400,'salt');
-        puzzlePieces.create(600,300,'salt');
-        puzzlePieces.create(600,200,'salt');
 
         // The player and its settings
         player = this.physics.add.sprite(this.playerSpawnX, this.playerSpawnY, 'dude');

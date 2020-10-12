@@ -94,8 +94,6 @@ class Scene3_1 extends Phaser.Scene
         
 
         //puzzle pieces
-        puzzlePieces.create(600,400,'salt');
-        puzzlePieces.create(600,300,'salt');
         puzzlePieces.create(600,200,'salt');
 
         // The player and its settings

@@ -95,9 +95,6 @@ class Scene3_2 extends Phaser.Scene
         
 
         //puzzle pieces
-        puzzlePieces.create(600,400,'salt');
-        puzzlePieces.create(600,300,'salt');
-        puzzlePieces.create(600,200,'salt');
 
         // The player and its settings
         player = this.physics.add.sprite(this.playerSpawnX, this.playerSpawnY, 'dude');
