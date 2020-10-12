@@ -10,11 +10,11 @@ var bottomBorder;
 var leftBorder;
 var rightBorder;
 
-class Scene2_1 extends Phaser.Scene
+class Scene3_1 extends Phaser.Scene
 {
     constructor()
     {
-        super("Scene2_1");
+        super("Scene3_1");
     }
 
     init(data)
@@ -54,19 +54,32 @@ class Scene2_1 extends Phaser.Scene
         // add trees
         trees = this.physics.add.staticGroup();
         puzzlePieces = this.physics.add.staticGroup();
-        trees.create(10,52,'tallTree');
-        trees.create(100,52,'tallTree');
-        trees.create(190,52,'tallTree');
-        trees.create(280,52,'tallTree');
-        trees.create(523,52,'tallTree');
-        trees.create(600,52,'tallTree');
-        trees.create(689,52,'tallTree');
-        trees.create(780,52,'tallTree');
+
+        for (var i=0; i <= 850; i+=90) 
+        {
+            trees.create(i,52,'tallTree');
+        };
+
+        var tree1 = trees.create(220,290,'tallTree');
+        tree1.body.setCircle(50);
+        tree1.body.setOffset(10, 0);
+
+        var tree2 = trees.create(190,355,'tallTree');
+        tree2.body.setCircle(50);
+        tree2.body.setOffset(10, 30);
+
+        for (var i=850; i >= 290; i-=90) 
+        {
+            trees.create(i,295,'tallTree');
+            trees.create(i-30,345,'tallTree');
+        };
+
+        
+
         trees.create(30,145,'tallTree');
-        trees.create(25,250,'tallTree');
-        trees.create(35,365,'tallTree');
-        trees.create(25,480,'tallTree');
-        trees.create(75,525,'tallTree');
+        trees.create(30,250,'tallTree');
+        trees.create(30,365,'tallTree');
+        trees.create(30,480,'tallTree');
         trees.create(775,480,'tallTree');
         trees.create(725,525,'tallTree');
         trees.create(10,560,'tallTree');
@@ -78,14 +91,7 @@ class Scene2_1 extends Phaser.Scene
         trees.create(689,560,'tallTree');
         trees.create(780,560,'tallTree');
 
-        var stump1 = trees.create(140,350,'bigStump');
-        stump1.body.setCircle(30);
-        stump1.body.setOffset(25, -5);
-
-        var stump2 = trees.create(600,250,'bigStump');
-        stump2.setScale(1.25);
-        stump2.body.setCircle(50);
-        stump2.body.setOffset(10,-20);
+        
 
         //puzzle pieces
         puzzlePieces.create(600,400,'salt');
@@ -125,9 +131,9 @@ class Scene2_1 extends Phaser.Scene
 
         // room change objects
 
-        topBorder = this.add.rectangle(400,0,200,25, 0xFF0000);
-        this.physics.add.existing(topBorder);
-        this.physics.add.overlap(player, topBorder, this.moveRoomUp, null, this);
+        // topBorder = this.add.rectangle(400,0,200,25, 0xFF0000);
+        // this.physics.add.existing(topBorder);
+        // this.physics.add.overlap(player, topBorder, this.moveRoomUp, null, this);
 
         bottomBorder = this.add.rectangle(400,600,200,25, 0xFF0000);
         this.physics.add.existing(bottomBorder);
@@ -137,61 +143,55 @@ class Scene2_1 extends Phaser.Scene
         // this.physics.add.existing(leftBorder);
         // this.physics.add.overlap(player, leftBorder, this.moveRoomLeft, null, this);
 
-        rightBorder = this.add.rectangle(800, 275, 25, 300, 0xFF0000);
+        rightBorder = this.add.rectangle(800, 200, 25, 150, 0xFF0000);
         this.physics.add.existing(rightBorder);
         this.physics.add.overlap(player, rightBorder, this.moveRoomRight, null, this);
 
         // time is on and furfur has spawned
         if (furfurSpawned == true && roomsTraversed < 3){
-          this.time.addEvent({
-            delay: 750,
-            // spawn furfur
-            callback: () =>{
-              if (prevRoom == 'Scene1'){
-                var x = 300;
-                var y = 500;
-                furfur = this.physics.add.sprite(x, y, 'furfur');
-              }
-              else if (prevRoom == 'Scene2_2'){
-                var x = 750;
-                var y = 300;
-                furfur = this.physics.add.sprite(x, y, 'furfur');
-              };
-              furfur.setActive(true).setVisible(true);
-              furfur.body.enable = true;
-              furfurSpawned = true;
-              this.physics.add.collider(player, furfur);
-              this.physics.add.overlap(player, furfur, this.startOver, null, this);
-              furfur.setCollideWorldBounds(true);
-            },
-          });
-          roomsTraversed = roomsTraversed + 1;
-        }
-        else if (furfurSpawned == true && roomsTraversed == 3){
-          roomsTraversed = 0;
-          furfurSpawned = false;
-        }
-
-        // furfur has not yet spawned
-        if (furfurSpawned == false){
-          var furfurCooldown = Phaser.Math.Between(2000,5000);
-          this.time.addEvent({
-            delay: furfurCooldown,
-            // spawn furfur
-            callback: () =>{
-              furfur = this.physics.add.sprite(0, 0, 'furfur');
-              furfur.setActive(true).setVisible(true);
-              furfur.body.enable = true;
-              furfurSpawned = true;
-              var collider = this.physics.add.collider(player, furfur);
-              var overlap = this.physics.add.overlap(player, furfur, this.startOver, null, this);
-              setFurfurCoord();
-              furfur.setCollideWorldBounds(true);
-              furfurSpawned = true;
-            },
-          });
-        }
-
+            this.time.addEvent({
+              delay: 750,
+              // spawn furfur
+              callback: () =>{
+                if (prevRoom == 'Scene2_1'){
+                  var x = 400;
+                  var y = 750;
+                  furfur = this.physics.add.sprite(x, y, 'furfur');
+                };
+                furfur.setActive(true).setVisible(true);
+                furfur.body.enable = true;
+                furfurSpawned = true;
+                this.physics.add.collider(player, furfur);
+                this.physics.add.overlap(player, furfur, this.startOver, null, this);
+                furfur.setCollideWorldBounds(true);
+              },
+            });
+            roomsTraversed = roomsTraversed + 1;
+          }
+          else if (furfurSpawned == true && roomsTraversed == 4){
+            roomsTraversed = 0;
+            furfurSpawned = false;
+          }
+  
+          // furfur has not yet spawned
+          if (furfurSpawned == false){
+            var furfurCooldown = Phaser.Math.Between(2000,5000);
+            this.time.addEvent({
+              delay: furfurCooldown,
+              // spawn furfur
+              callback: () =>{
+                furfur = this.physics.add.sprite(0, 0, 'furfur');
+                furfur.setActive(true).setVisible(true);
+                furfur.body.enable = true;
+                furfurSpawned = true;
+                var collider = this.physics.add.collider(player, furfur);
+                var overlap = this.physics.add.overlap(player, furfur, this.startOver, null, this);
+                setFurfurCoord();
+                furfur.setCollideWorldBounds(true);
+                furfurSpawned = true;
+              },
+            });
+          }
     }
 
     update()
@@ -201,7 +201,8 @@ class Scene2_1 extends Phaser.Scene
 
         movePlayer();
 
-        moveFurfur();
+        furfur.disableBody();
+        //moveFurfur();
     }
 
     startOver(player, furfur)
@@ -220,26 +221,25 @@ class Scene2_1 extends Phaser.Scene
 
     moveRoomUp(player, topBorder)
     {
-        prevRoom = "Scene2_1";
-        this.scene.start("Scene3_1", {x: playerX, y: 550});
+        prevRoom = "Scene3_1";
+        this.scene.start("Scene1", {x: playerX, y: 550});
     }
 
     moveRoomDown(player, bottomBorder)
     {
-        prevRoom = "Scene2_1";
-        this.scene.start("Scene1", {x: playerX, y: 50});
+        prevRoom = "Scene3_1";
+        this.scene.start("Scene2_1", {x: playerX, y: 50});
     }
 
     moveRoomLeft(player, leftBorder)
     {
-        prevRoom = "Scene2_1";
+        prevRoom = "Scene3_1";
         this.scene.start("Scene1", {x: 750, y: playerY});
     }
 
     moveRoomRight(player, rightBorder)
     {
-        prevRoom = "Scene2_1";
-        this.scene.start("Scene2_2", {x: 50, y: playerY});
+        prevRoom = "Scene3_1";
+        this.scene.start("Scene3_2", {x: 50, y: playerY});
     }
-  
 };

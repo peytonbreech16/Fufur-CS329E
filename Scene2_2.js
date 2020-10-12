@@ -70,6 +70,7 @@ class Scene2_2 extends Phaser.Scene
         trees.create(520,525,'tallTree');
         trees.create(580,525,'tallTree');
         trees.create(650,525,'tallTree');
+        trees.create(523,52,'tallTree');
 
         var tree1 = trees.create(400,270,'wideTree');
         tree1.body.setCircle(60);
@@ -117,9 +118,9 @@ class Scene2_2 extends Phaser.Scene
 
         // room change objects
 
-        // topBorder = this.add.rectangle(400,0,200,25, 0xFF0000);
-        // this.physics.add.existing(topBorder);
-        // this.physics.add.overlap(player, topBorder, this.moveRoomUp, null, this);
+        topBorder = this.add.rectangle(400,0,200,25, 0xFF0000);
+        this.physics.add.existing(topBorder);
+        this.physics.add.overlap(player, topBorder, this.moveRoomUp, null, this);
 
         bottomBorder = this.add.rectangle(350,600,325,25, 0xFF0000);
         this.physics.add.existing(bottomBorder);
@@ -212,7 +213,7 @@ class Scene2_2 extends Phaser.Scene
     moveRoomUp(player, topBorder)
     {
         prevRoom = "Scene2_2";
-        this.scene.start("Scene1", {x: playerX, y: 550});
+        this.scene.start("Scene3_2", {x: playerX, y: 550});
     }
 
     moveRoomDown(player, bottomBorder)
