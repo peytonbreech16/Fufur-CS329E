@@ -105,10 +105,6 @@ class Scene1 extends Phaser.Scene
         furfur.setVisible(false);
         furfur.disableBody(true,true);
 
-        //Add collider for player and furfur and when they touch each other
-        // this.physics.add.collider(player, furfur);
-        // this.physics.add.overlap(player, furfur, this.startOver, null, this);
-
         //  Player and furfur physics properties. Give the little guy a slight bounce.
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
@@ -217,7 +213,7 @@ class Scene1 extends Phaser.Scene
         this.physics.add.overlap(player, rightBorder, this.moveRoomRight, null, this);
 
         // furfur is chasing player
-        if (furfurSpawned == true && roomsTraversed < 3){
+        if (furfurSpawned && roomsTraversed < 3){
           this.time.addEvent({
             delay: 750,
             // spawn furfur
@@ -243,13 +239,13 @@ class Scene1 extends Phaser.Scene
           });
           roomsTraversed = roomsTraversed + 1;
         }
-        else if (furfurSpawned == true && roomsTraversed == 3){
+        else if (furfurSpawned && roomsTraversed == 3){
           roomsTraversed = 0;
           furfurSpawned = false;
         }
 
         // furfur has not yet spawned
-        if (furfurSpawned == false){
+        if (!furfurSpawned){
           var furfurCooldown = Phaser.Math.Between(2000,5000);
           this.time.addEvent({
             delay: furfurCooldown,
@@ -259,8 +255,8 @@ class Scene1 extends Phaser.Scene
               furfur.setActive(true).setVisible(true);
               furfur.body.enable = true;
               furfurSpawned = true;
-              var collider = this.physics.add.collider(player, furfur);
-              var overlap = this.physics.add.overlap(player, furfur, this.startOver, null, this);
+              this.physics.add.collider(player, furfur);
+              this.physics.add.overlap(player, furfur, this.startOver, null, this);
               setFurfurCoord();
               furfur.setCollideWorldBounds(true);
               furfurSpawned = true;
@@ -277,6 +273,8 @@ class Scene1 extends Phaser.Scene
         movePlayer();
 
         moveFurfur();
+        console.debug("P x" + player.x);
+        console.debug("F x" + furfur.x);
     }
 
     startOver(player, furfur)
@@ -372,28 +370,31 @@ function movePlayer()
 function moveFurfur()
     {
         // furfur movement
-        if (furfur.x > player.x+5)
+        if (furfur.x > player.x+2)
         {
-            furfur.x -= 2.3;
+            furfur.x -= 2;
             furfur.anims.play('furfur_left');
             furfur.flipX = false;
+            console.debug("going left");
         }
 
-        else if (furfur.x < player.x-5)
+        else if (furfur.x < player.x-2)
         {
-            furfur.x += 2.3;
+            furfur.x += 2;
             furfur.anims.play('furfur_right');
             furfur.flipX = true;
+            console.debug("going right");
+            console.debug(furfur.flipX);
         }
 
-        if (furfur.y > player.y+5)
+        if (furfur.y > player.y+2)
         {
-            furfur.y -= 2.3;
+            furfur.y -= 2;
             furfur.anims.play('furfur_up');
         }
-        else if (furfur.y < player.y-5)
+        else if (furfur.y < player.y-2)
         {
-            furfur.y += 2.3;
+            furfur.y += 2;
             furfur.anims.play('furfur_down');
         }
     };
