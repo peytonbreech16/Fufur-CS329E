@@ -231,7 +231,7 @@ class Scene1 extends Phaser.Scene
               furfur.setActive(true).setVisible(true);
               furfur.body.enable = true;
               furfurSpawned = true;
-              this.physics.add.collider(player, furfur);
+              //this.physics.add.collider(player, furfur);
               this.physics.add.overlap(player, furfur, this.startOver, null, this);
               furfur.setCollideWorldBounds(true);
 
@@ -255,7 +255,7 @@ class Scene1 extends Phaser.Scene
               furfur.setActive(true).setVisible(true);
               furfur.body.enable = true;
               furfurSpawned = true;
-              this.physics.add.collider(player, furfur);
+              //this.physics.add.collider(player, furfur);
               this.physics.add.overlap(player, furfur, this.startOver, null, this);
               setFurfurCoord();
               furfur.setCollideWorldBounds(true);
