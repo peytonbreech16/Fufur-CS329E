@@ -40,6 +40,8 @@ class Scene1_2 extends Phaser.Scene
         this.load.image('tallTree','assets/tallTree.png');
         this.load.image('wideTree','assets/wideTree.png');
         this.load.audio('BackgroundMusic',['assets/BackgroundMusic2.mp3']);
+        this.load.audio('FurfurMusic',['assets/FurfurMusic.mp3']);
+        this.load.audio('pickUp',['assets/PickUp_1.wav']);
         this.load.image('salt', 'assets/salt.png');
         this.load.image('bigStump', 'assets/bigStump.png');
     }
@@ -50,6 +52,10 @@ class Scene1_2 extends Phaser.Scene
         var background = this.add.image(400,350,'ground');
         background.displayWidth = game.config.width * 1;
         background.scaleY = background.scaleX;
+
+        //sound effects
+        pickUpSFX = this.sound.add('pickUp');
+        pickUpSFX.setVolume(.50);
 
         // add trees
         trees = this.physics.add.staticGroup();
@@ -90,10 +96,6 @@ class Scene1_2 extends Phaser.Scene
         furfur.setVisible(false);
         furfur.disableBody(true,true);
 
-        //Add collider for player and furfur and when they touch each other
-        // this.physics.add.collider(player, furfur);
-        // this.physics.add.overlap(player, furfur, this.startOver, null, this);
-
         //  Player and furfur physics properties. Give the little guy a slight bounce.
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
@@ -119,62 +121,60 @@ class Scene1_2 extends Phaser.Scene
         this.physics.add.existing(topBorder);
         this.physics.add.overlap(player, topBorder, this.moveRoomUp, null, this);
 
-        // bottomBorder = this.add.rectangle(400,600,550,25, 0xFF0000);
-        // this.physics.add.existing(bottomBorder);
-        // this.physics.add.overlap(player, bottomBorder, this.moveRoomDown, null, this);
-
         leftBorder = this.add.rectangle(0,300,25,250, 0xFF0000);
         this.physics.add.existing(leftBorder);
         this.physics.add.overlap(player, leftBorder, this.moveRoomLeft, null, this);
 
-        // rightBorder = this.add.rectangle(800, 275, 25, 300, 0xFF0000);
-        // this.physics.add.existing(rightBorder);
-        // this.physics.add.overlap(player, rightBorder, this.moveRoomRight, null, this);
-
-        // time is on and furfur has spawned
-        if (furfurSpawned == true && roomsTraversed < 3){
-          this.time.addEvent({
-            delay: 750,
-            // spawn furfur
-            callback: () =>{
-              var x = this.playerSpawnX;
-              var y = this.playerSpawnY;
-              furfur = this.physics.add.sprite(x, y, 'furfur');
-              
-              furfur.setActive(true).setVisible(true);
-              furfur.body.enable = true;
-              furfurSpawned = true;
-              this.physics.add.collider(player, furfur);
-              this.physics.add.overlap(player, furfur, this.startOver, null, this);
-              furfur.setCollideWorldBounds(true);
-            },
-          });
-          roomsTraversed = roomsTraversed + 1;
-        }
-        else if (furfurSpawned == true && roomsTraversed == 4){
-          roomsTraversed = 0;
-          furfurSpawned = false;
-        }
-
-        // furfur has not yet spawned
-        if (furfurSpawned == false){
-          var furfurCooldown = Phaser.Math.Between(2000,5000);
-          this.time.addEvent({
-            delay: furfurCooldown,
-            // spawn furfur
-            callback: () =>{
-              furfur = this.physics.add.sprite(0, 0, 'furfur');
-              furfur.setActive(true).setVisible(true);
-              furfur.body.enable = true;
-              furfurSpawned = true;
-              var collider = this.physics.add.collider(player, furfur);
-              var overlap = this.physics.add.overlap(player, furfur, this.startOver, null, this);
-              setFurfurCoord();
-              furfur.setCollideWorldBounds(true);
-              furfurSpawned = true;
-            },
-          });
-        }
+        // furfur is chasing player
+        if (furfurSpawned && roomsTraversed < 3){
+            this.time.addEvent({
+              delay: 750,
+  
+              // spawn furfur
+              callback: () =>{
+                var x = this.playerSpawnX;
+                var y = this.playerSpawnY;
+                furfur = this.physics.add.sprite(x, y, 'furfur');
+                furfur.setActive(true).setVisible(true);
+                furfur.body.enable = true;
+                furfurSpawned = true;
+                this.physics.add.overlap(player, furfur, this.startOver, null, this);
+                furfur.setCollideWorldBounds(true);
+  
+              },
+            });
+            roomsTraversed = roomsTraversed + 1;
+          }
+          else if (furfurSpawned && roomsTraversed == 3){
+            roomsTraversed = 0;
+            furfurSpawned = false;
+            furfurMusic.stop();
+            backgroundMusic.play();
+          }
+  
+          // furfur has not yet spawned
+          if (!furfurSpawned){
+            var furfurCooldown = Phaser.Math.Between(2000,5000);
+            this.time.addEvent({
+              delay: furfurCooldown,
+  
+              // spawn furfur
+              callback: () =>{
+                furfur = this.physics.add.sprite(0, 0, 'furfur');
+                furfur.setActive(true).setVisible(true);
+                furfur.body.enable = true;
+  
+                //music playing for furfur spawn
+                backgroundMusic.stop();
+                furfurMusic.play();
+                
+                this.physics.add.overlap(player, furfur, this.startOver, null, this);
+                setFurfurCoord();
+                furfur.setCollideWorldBounds(true);
+                furfurSpawned = true;
+              },
+            });
+          }
 
     }
 
@@ -188,16 +188,21 @@ class Scene1_2 extends Phaser.Scene
         moveFurfur();
     }
 
+    //function for when the game needs to start over
     startOver(player, furfur)
     {
-        this.scene.start("Replay");
+        this.scene.switch('Replay');
         backgroundMusic.stop();
+        furfurMusic.stop();
         collectedPieces = 0;
+        furfurSpawned = false;
+        musicPlaying = false;
     }
 
     pickUpPiece(player, puzzlePieces)
     {
         puzzlePieces.destroy();
+        pickUpSFX.play();
         collectedPieces++;
         scoreText.setText('Pieces Collected: ' + collectedPieces);
     }
