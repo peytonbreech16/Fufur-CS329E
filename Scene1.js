@@ -17,9 +17,9 @@ var backgroundMusic
 var furfurSpawned = false; // is furfur chasing
 var roomsTraversed = 0; // number of rooms furfur has followed you for
 var prevRoom; // room the player was previously in
-var musicPlaying = false
-var furfurMusic
-var pickUpSFX
+var musicPlaying = false;
+var furfurMusic;
+var pickUpSFX;
 
 class Scene1 extends Phaser.Scene
 {
@@ -302,6 +302,15 @@ class Scene1 extends Phaser.Scene
         puzzlePieces.destroy();
         pickUpSFX.play();
         collectedPieces++;
+        if (collectedPieces >= 3)
+        {
+            this.scene.switch('YouWin');
+            backgroundMusic.stop();
+            furfurMusic.stop();
+            collectedPieces = 0;
+            furfurSpawned = false;
+            musicPlaying = false;
+        }
         scoreText.setText('Pieces Collected: ' + collectedPieces);
     }
 

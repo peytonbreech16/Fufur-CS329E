@@ -3,7 +3,6 @@ var wasd;
 var gameOver = false;
 var trees;
 var puzzlePieces;
-var collectedPieces = 0;
 var scoreText;
 var topBorder;
 var bottomBorder;
@@ -218,6 +217,15 @@ class Scene3_2 extends Phaser.Scene
         puzzlePieces.destroy();
         pickUpSFX.play();
         collectedPieces++;
+        if (collectedPieces >= 3)
+        {
+            this.scene.switch('YouWin');
+            backgroundMusic.stop();
+            furfurMusic.stop();
+            collectedPieces = 0;
+            furfurSpawned = false;
+            musicPlaying = false;
+        }
         scoreText.setText('Pieces Collected: ' + collectedPieces);
     }
 
