@@ -9,11 +9,11 @@ var bottomBorder;
 var leftBorder;
 var rightBorder;
 
-class Scene1_2 extends Phaser.Scene
+class Scene1_4 extends Phaser.Scene
 {
     constructor()
     {
-        super("Scene1_2");
+        super("Scene1_4");
     }
 
     init(data)
@@ -59,33 +59,45 @@ class Scene1_2 extends Phaser.Scene
         // add trees
         trees = this.physics.add.staticGroup();
         puzzlePieces = this.physics.add.staticGroup();
-        trees.create(10,52,'tallTree');
-        trees.create(75,52,'tallTree');
-        trees.create(150,52,'tallTree');
-        trees.create(520,52,'tallTree');
-        trees.create(580,52,'tallTree');
-        trees.create(650,52,'tallTree');
-        trees.create(725,52,'tallTree');
-        trees.create(780,52,'tallTree');
-        trees.create(30,145,'tallTree');
-        trees.create(100,145,'tallTree');
-        trees.create(25,480,'tallTree');
-        trees.create(75,525,'tallTree');
-        trees.create(775,480,'tallTree');
-        trees.create(725,525,'tallTree');
 
-        for (var i=100; i < 700; i+=90)
+        var tree1 = trees.create(580,350,'tallTree');
+        tree1.body.setCircle(50);
+        tree1.body.setOffset(10, -5);
+
+        var tree1 = trees.create(400,440,'tallTree');
+        tree1.body.setCircle(50);
+        tree1.body.setOffset(0, -5);
+
+        for (var i=0; i < 900; i+=90)
         {
-            trees.create(i,540,'tallTree');
+            trees.create(i,52,'tallTree');
+            trees.create(i,120,'tallTree');
         };
 
-        var stump1 = trees.create(480,180,'bigStump');
-        stump1.body.setCircle(30);
-        stump1.body.setOffset(25, -5);
+        for (var i=10; i < 270; i+=90)
+        {
+            trees.create(i,350,'tallTree');
+            trees.create(i,440,'tallTree');
+            trees.create(i,530,'tallTree');
+        };
 
-        var stump2 = trees.create(480,420,'wideTree');
-        stump2.body.setCircle(60);
-        stump2.body.setOffset(25, 0);
+        trees.create(750,210,'tallTree');
+
+        for (var i=580; i < 1000; i+=90)
+        {
+            trees.create(i+90,350,'tallTree');
+            trees.create(i-90,440,'tallTree');
+            trees.create(i-170,530,'tallTree');
+        };
+
+        var rocks = this.physics.add.staticGroup();
+        var rock1 = rocks.create(420,280,'largeRock');
+        rocks.scaleXY(3);
+        rock1.body.setCircle(20);
+        rock1.body.setOffset(-25, -15);
+
+        var log1 = trees.create(300,550,'log');
+        log1.setScale(3);
 
         //puzzle pieces
         puzzlePieces.create(600,200,'salt');
@@ -119,17 +131,9 @@ class Scene1_2 extends Phaser.Scene
 
         // room change objects
 
-        topBorder = this.add.rectangle(350,0,325,25, 0xFF0000);
-        this.physics.add.existing(topBorder);
-        this.physics.add.overlap(player, topBorder, this.moveRoomUp, null, this);
-
-        leftBorder = this.add.rectangle(0,300,25,250, 0xFF0000);
+        leftBorder = this.add.rectangle(0,230,25,120, 0xFF0000);
         this.physics.add.existing(leftBorder);
         this.physics.add.overlap(player, leftBorder, this.moveRoomLeft, null, this);
-
-        rightBorder = this.add.rectangle(800, 275, 25, 300, 0xFF0000);
-        this.physics.add.existing(rightBorder);
-        this.physics.add.overlap(player, rightBorder, this.moveRoomRight, null, this);
 
         // furfur is chasing player
         if (furfurSpawned && roomsTraversed < 3){
@@ -236,25 +240,25 @@ class Scene1_2 extends Phaser.Scene
 
     moveRoomUp(player, topBorder)
     {
-        prevRoom = "Scene1_2";
-        this.scene.start("Scene2_2", {x: playerX, y: 550});
+        prevRoom = "Scene1_4";
+        this.scene.start("Scene1", {x: playerX, y: 550});
     }
 
     moveRoomDown(player, bottomBorder)
     {
-        prevRoom = "Scene1_2";
+        prevRoom = "Scene1_4";
         this.scene.start("Scene1", {x: playerX, y: 50});
     }
 
     moveRoomLeft(player, leftBorder)
     {
-        prevRoom = "Scene1_2";
-        this.scene.start("Scene1", {x: 750, y: playerY});
+        prevRoom = "Scene1_4";
+        this.scene.start("Scene1_3", {x: 750, y: playerY});
     }
 
     moveRoomRight(player, rightBorder)
     {
-        prevRoom = "Scene1_2";
-        this.scene.start("Scene1_3", {x: 50, y: playerY});
+        prevRoom = "Scene1_4";
+        this.scene.start("Scene1", {x: 50, y: playerY});
     }
 };

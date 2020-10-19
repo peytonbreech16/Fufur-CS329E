@@ -56,6 +56,9 @@ class Scene1 extends Phaser.Scene
         this.load.audio('pickUp',['assets/PickUp_1.wav']);
         this.load.image('salt', 'assets/salt.png');
         this.load.image('medRock', 'assets/medRock.png');
+        this.load.image('largeRock', 'assets/largeRock.png');
+        this.load.image('bigStump', 'assets/bigStump.png');
+        this.load.image('log', 'assets/log.png');
     }
 
     create()
@@ -210,6 +213,10 @@ class Scene1 extends Phaser.Scene
         this.physics.add.existing(topBorder);
         this.physics.add.overlap(player, topBorder, this.moveRoomUp, null, this);
 
+        bottomBorder = this.add.rectangle(400,600,550,25, 0xFF0000);
+        this.physics.add.existing(bottomBorder);
+        this.physics.add.overlap(player, bottomBorder, this.moveRoomDown, null, this);
+
         rightBorder = this.add.rectangle(800, 300, 25, 250, 0xFF0000);
         this.physics.add.existing(rightBorder);
         this.physics.add.overlap(player, rightBorder, this.moveRoomRight, null, this);
@@ -336,7 +343,7 @@ class Scene1 extends Phaser.Scene
     moveRoomDown(player, bottomBorder)
     {
         prevRoom = "Scene1";
-        this.scene.start("Scene1", {x: playerX, y: 50});
+        this.scene.start("Scene0_1", {x: playerX, y: 50});
     }
 
     moveRoomLeft(player, leftBorder)
