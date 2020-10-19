@@ -241,8 +241,20 @@ class Scene1 extends Phaser.Scene
           backgroundMusic.play();
         }
 
-        // furfur has not yet spawned
         if (!furfurSpawned){
+          var randomSpawn = Phaser.Math.Between(0,1); // should furfur spawn?
+          if (randomSpawn <= 0.5){
+            randomSpawn = false;
+          }
+          else {
+            randomSpawn = true;
+          }
+
+          console.log(randomSpawn);
+        }
+
+        // furfur has not yet spawned
+        if (!furfurSpawned && randomSpawn){
           var furfurCooldown = Phaser.Math.Between(2000,5000);
           this.time.addEvent({
             delay: furfurCooldown,

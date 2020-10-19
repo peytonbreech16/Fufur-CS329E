@@ -144,7 +144,7 @@ class Scene2_1 extends Phaser.Scene
               var x = this.playerSpawnX;
               var y = this.playerSpawnY;
               furfur = this.physics.add.sprite(x, y, 'furfur');
-              
+
               furfur.setActive(true).setVisible(true);
               furfur.body.enable = true;
               furfurSpawned = true;
@@ -160,8 +160,20 @@ class Scene2_1 extends Phaser.Scene
           furfurSpawned = false;
         }
 
+        if (!furfurSpawned){
+          var randomSpawn = Phaser.Math.Between(0,1); // should furfur spawn?
+          if (randomSpawn <= 0.5){
+            randomSpawn = false;
+          }
+          else {
+            randomSpawn = true;
+          }
+
+          console.log(randomSpawn);
+        }
+
         // furfur has not yet spawned
-        if (furfurSpawned == false){
+        if (!furfurSpawned && randomSpawn){
           var furfurCooldown = Phaser.Math.Between(2000,5000);
           this.time.addEvent({
             delay: furfurCooldown,
@@ -243,5 +255,5 @@ class Scene2_1 extends Phaser.Scene
         prevRoom = "Scene2_1";
         this.scene.start("Scene2_2", {x: 50, y: playerY});
     }
-  
+
 };

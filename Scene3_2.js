@@ -61,16 +61,16 @@ class Scene3_2 extends Phaser.Scene
         trees = this.physics.add.staticGroup();
         puzzlePieces = this.physics.add.staticGroup();
 
-        for (var i=0; i <= 850; i+=90) 
+        for (var i=0; i <= 850; i+=90)
         {
             trees.create(i,52,'tallTree');
         };
-        for (var i=100; i <= 500; i+=100) 
+        for (var i=100; i <= 500; i+=100)
         {
             trees.create(750,i,'tallTree');
         };
 
-        for (var i=0; i <= 270; i+=90) 
+        for (var i=0; i <= 270; i+=90)
         {
             trees.create(i+5,295,'tallTree');
             trees.create(i+5,350,'tallTree');
@@ -97,7 +97,7 @@ class Scene3_2 extends Phaser.Scene
 
         var log1 = trees.create(480,175,'log');
         log1.setScale(3);
-        
+
 
         //puzzle pieces
 
@@ -142,7 +142,7 @@ class Scene3_2 extends Phaser.Scene
         if (furfurSpawned && roomsTraversed < 3){
             this.time.addEvent({
               delay: 750,
-  
+
               // spawn furfur
               callback: () =>{
                 var x = this.playerSpawnX;
@@ -153,7 +153,7 @@ class Scene3_2 extends Phaser.Scene
                 furfurSpawned = true;
                 this.physics.add.overlap(player, furfur, this.startOver, null, this);
                 furfur.setCollideWorldBounds(true);
-  
+
               },
             });
             roomsTraversed = roomsTraversed + 1;
@@ -164,23 +164,35 @@ class Scene3_2 extends Phaser.Scene
             furfurMusic.stop();
             backgroundMusic.play();
           }
-  
-          // furfur has not yet spawned
+
           if (!furfurSpawned){
+            var randomSpawn = Phaser.Math.Between(0,1); // should furfur spawn?
+            if (randomSpawn <= 0.5){
+              randomSpawn = false;
+            }
+            else {
+              randomSpawn = true;
+            }
+
+            console.log(randomSpawn);
+          }
+
+          // furfur has not yet spawned
+          if (!furfurSpawned && randomSpawn){
             var furfurCooldown = Phaser.Math.Between(2000,5000);
             this.time.addEvent({
               delay: furfurCooldown,
-  
+
               // spawn furfur
               callback: () =>{
                 furfur = this.physics.add.sprite(0, 0, 'furfur');
                 furfur.setActive(true).setVisible(true);
                 furfur.body.enable = true;
-  
+
                 //music playing for furfur spawn
                 backgroundMusic.stop();
                 furfurMusic.play();
-                
+
                 this.physics.add.overlap(player, furfur, this.startOver, null, this);
                 setFurfurCoord();
                 furfur.setCollideWorldBounds(true);

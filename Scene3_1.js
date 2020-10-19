@@ -51,7 +51,7 @@ class Scene3_1 extends Phaser.Scene
         var background = this.add.image(400,350,'ground');
         background.displayWidth = game.config.width * 1;
         background.scaleY = background.scaleX;
-        
+
         //sound effects
         pickUpSFX = this.sound.add('pickUp');
         pickUpSFX.setVolume(.50);
@@ -60,7 +60,7 @@ class Scene3_1 extends Phaser.Scene
         trees = this.physics.add.staticGroup();
         puzzlePieces = this.physics.add.staticGroup();
 
-        for (var i=0; i <= 850; i+=90) 
+        for (var i=0; i <= 850; i+=90)
         {
             trees.create(i,52,'tallTree');
         };
@@ -73,7 +73,7 @@ class Scene3_1 extends Phaser.Scene
         tree2.body.setCircle(50);
         tree2.body.setOffset(10, 30);
 
-        for (var i=850; i >= 290; i-=90) 
+        for (var i=850; i >= 290; i-=90)
         {
             trees.create(i,295,'tallTree');
             trees.create(i-30,345,'tallTree');
@@ -94,7 +94,7 @@ class Scene3_1 extends Phaser.Scene
         trees.create(689,560,'tallTree');
         trees.create(780,560,'tallTree');
 
-        
+
 
         //puzzle pieces
         puzzlePieces.create(600,200,'salt');
@@ -144,7 +144,7 @@ class Scene3_1 extends Phaser.Scene
         if (furfurSpawned && roomsTraversed < 3){
             this.time.addEvent({
               delay: 750,
-  
+
               // spawn furfur
               callback: () =>{
                 var x = this.playerSpawnX;
@@ -155,7 +155,7 @@ class Scene3_1 extends Phaser.Scene
                 furfurSpawned = true;
                 this.physics.add.overlap(player, furfur, this.startOver, null, this);
                 furfur.setCollideWorldBounds(true);
-  
+
               },
             });
             roomsTraversed = roomsTraversed + 1;
@@ -166,23 +166,35 @@ class Scene3_1 extends Phaser.Scene
             furfurMusic.stop();
             backgroundMusic.play();
           }
-  
-          // furfur has not yet spawned
+
           if (!furfurSpawned){
+            var randomSpawn = Phaser.Math.Between(0,1); // should furfur spawn?
+            if (randomSpawn <= 0.5){
+              randomSpawn = false;
+            }
+            else {
+              randomSpawn = true;
+            }
+
+            console.log(randomSpawn);
+          }
+
+          // furfur has not yet spawned
+          if (!furfurSpawned && randomSpawn){
             var furfurCooldown = Phaser.Math.Between(2000,5000);
             this.time.addEvent({
               delay: furfurCooldown,
-  
+
               // spawn furfur
               callback: () =>{
                 furfur = this.physics.add.sprite(0, 0, 'furfur');
                 furfur.setActive(true).setVisible(true);
                 furfur.body.enable = true;
-  
+
                 //music playing for furfur spawn
                 backgroundMusic.stop();
                 furfurMusic.play();
-                
+
                 this.physics.add.overlap(player, furfur, this.startOver, null, this);
                 setFurfurCoord();
                 furfur.setCollideWorldBounds(true);
