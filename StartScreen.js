@@ -1,6 +1,6 @@
-class YouWin extends Phaser.Scene{
+class StartScreen extends Phaser.Scene{
   constructor(){
-    super({key:'YouWin'});
+    super({key:'StartScreen'});
   }
 
   preload(){
@@ -10,8 +10,10 @@ class YouWin extends Phaser.Scene{
     this.load.image('back4', 'assets/background4.png');
     this.load.image('back5', 'assets/background5.png');
     this.load.image('back6', 'assets/background6.png');
-    this.load.image('youWon', 'assets/gameover.png');
-    this.load.image('playAgain', 'assets/playAgain.png');
+    this.load.image('titleText', 'assets/title.png');
+    this.load.image('start', 'assets/start.png');
+    this.load.image('inst1', 'assets/instructions1.png');
+    this.load.image('inst2', 'assets/instructions2.png');
   }
 
   create(){
@@ -40,9 +42,11 @@ class YouWin extends Phaser.Scene{
     back6.displayWidth = game.config.width * 1;
     back6.scaleY = back6.scaleX;
 
-    this.add.image(400,90,'youWon').setScale(.9);
+    this.add.image(400,90,'titleText').setScale(1.2);
+    this.add.image(400,375,'inst1').setScale(.8);
+    this.add.image(400,415,'inst2').setScale(.8);
 
-    var playButton = this.add.image(400,200,'playAgain').setScale(.75);
+    var playButton = this.add.image(400,200,'start').setScale(1.2);
     playButton.setInteractive({useHandCursor: true});
     playButton.on('pointerdown', function() {
       this.scene.switch('Scene1');
