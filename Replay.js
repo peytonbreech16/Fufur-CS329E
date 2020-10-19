@@ -45,7 +45,8 @@ class Replay extends Phaser.Scene{
     var playButton = this.add.image(400,200,'playAgain').setScale(.75);
     playButton.setInteractive({useHandCursor: true});
     playButton.on('pointerdown', function() {
-      this.scene.switch('Scene1');
+      location.reload();
+      return false;
     }, this);
   }
 }
