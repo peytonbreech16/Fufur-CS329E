@@ -10,7 +10,7 @@ class YouWin extends Phaser.Scene{
     this.load.image('back4', 'assets/background4.png');
     this.load.image('back5', 'assets/background5.png');
     this.load.image('back6', 'assets/background6.png');
-    this.load.image('youWon', 'assets/gameover.png');
+    this.load.image('youWon', 'assets/youWon.png');
     this.load.image('playAgain', 'assets/playAgain.png');
   }
 
