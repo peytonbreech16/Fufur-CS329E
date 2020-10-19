@@ -71,7 +71,7 @@ class Scene1 extends Phaser.Scene
         furfurMusic = this.sound.add('FurfurMusic');
         furfurMusic.setVolume(.30);
         this.playMusic(backgroundMusic);
-        
+
         //sound effects
         pickUpSFX = this.sound.add('pickUp');
         pickUpSFX.setVolume(.50);
@@ -256,7 +256,7 @@ class Scene1 extends Phaser.Scene
               //music playing for furfur spawn
               backgroundMusic.stop();
               furfurMusic.play();
-              
+
               this.physics.add.overlap(player, furfur, this.startOver, null, this);
               setFurfurCoord();
               furfur.setCollideWorldBounds(true);
