@@ -15,7 +15,7 @@ var config = {
         Scene2_1, Scene2_2, 
         Scene3_1, Scene3_2, 
         Scene0_1, Scene0_2, Scene0_3,
-        Replay],
+        Replay, YouWin],
 
 
 };
