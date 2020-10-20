@@ -53,7 +53,7 @@ class Scene1 extends Phaser.Scene
         this.load.image('wideTree','assets/wideTree.png');
         this.load.audio('BackgroundMusic',['assets/BackgroundMusic2.mp3']);
         this.load.audio('FurfurMusic',['assets/FurfurMusic.mp3']);
-        this.load.audio('pickUp',['assets/PickUp_1.wav']);
+        this.load.audio('pickUp',['assets/Pickup_1.wav']);
         this.load.image('salt', 'assets/salt.png');
         this.load.image('medRock', 'assets/medRock.png');
         this.load.image('largeRock', 'assets/largeRock.png');

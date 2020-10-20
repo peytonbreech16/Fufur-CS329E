@@ -49,7 +49,7 @@ class StartScreen extends Phaser.Scene{
     var playButton = this.add.image(400,200,'start').setScale(1.2);
     playButton.setInteractive({useHandCursor: true});
     playButton.on('pointerdown', function() {
-      this.scene.switch('Scene1');
+      this.scene.start('Scene1');
     }, this);
   }
 }

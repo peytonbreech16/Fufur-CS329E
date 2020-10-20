@@ -114,6 +114,7 @@ class Scene1_4 extends Phaser.Scene
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
         this.physics.add.collider(player, trees);
+        this.physics.add.collider(player, rocks);
 
         //Player touching puzzle pieces
         this.physics.add.overlap(player, puzzlePieces, this.pickUpPiece, null, this);
