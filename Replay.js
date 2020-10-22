@@ -1,3 +1,5 @@
+var playAgain2
+
 class Replay extends Phaser.Scene{
   constructor(){
     super({key:'Replay'});
@@ -10,8 +12,8 @@ class Replay extends Phaser.Scene{
     this.load.image('back4', 'assets/background4.png');
     this.load.image('back5', 'assets/background5.png');
     this.load.image('back6', 'assets/background6.png');
-    this.load.image('gameover', 'assets/gameover.png');
-    this.load.image('playAgain', 'assets/playAgain.png');
+    this.load.image('gameover', 'assets/text/gameover.png');
+    this.load.image('playAgain', 'assets/text/playAgain.png');
   }
 
   create(){
@@ -42,11 +44,21 @@ class Replay extends Phaser.Scene{
 
     this.add.image(400,90,'gameover');
 
-    var playButton = this.add.image(400,200,'playAgain').setScale(.75);
-    playButton.setInteractive({useHandCursor: true});
-    playButton.on('pointerdown', function() {
+    playAgain2 = this.add.image(400,200,'playAgain').setScale(.75);
+    playAgain2.setInteractive({useHandCursor: true});
+    playAgain2.on('pointerdown', function() {
       location.reload();
       return false;
+    }, this);
+  }
+
+  update(){
+    playAgain2.on('pointerover', function() {
+      playAgain2.setTintFill(0x450000);
+    }, this);
+
+    playAgain2.on('pointerout', function() {
+      playAgain2.clearTint();
     }, this);
   }
 }

@@ -1,3 +1,6 @@
+var playButton1
+var howToButton
+
 class StartScreen extends Phaser.Scene{
   constructor(){
     super({key:'StartScreen'});
@@ -10,10 +13,9 @@ class StartScreen extends Phaser.Scene{
     this.load.image('back4', 'assets/background4.png');
     this.load.image('back5', 'assets/background5.png');
     this.load.image('back6', 'assets/background6.png');
-    this.load.image('titleText', 'assets/title.png');
-    this.load.image('start', 'assets/start.png');
-    this.load.image('inst1', 'assets/instructions1.png');
-    this.load.image('inst2', 'assets/instructions2.png');
+    this.load.image('titleText', 'assets/text/title.png');
+    this.load.image('start', 'assets/text/start.png');
+    this.load.image('howToPlay', 'assets/text/howToPlay.png');
   }
 
   create(){
@@ -43,13 +45,35 @@ class StartScreen extends Phaser.Scene{
     back6.scaleY = back6.scaleX;
 
     this.add.image(400,90,'titleText').setScale(1.2);
-    this.add.image(400,375,'inst1').setScale(.8);
-    this.add.image(400,415,'inst2').setScale(.8);
 
-    var playButton = this.add.image(400,200,'start').setScale(1.2);
-    playButton.setInteractive({useHandCursor: true});
-    playButton.on('pointerdown', function() {
+    playButton1 = this.add.image(400,200,'start').setScale(1.2);
+    playButton1.setInteractive({useHandCursor: true});
+    playButton1.on('pointerdown', function() {
       this.scene.start('Scene1');
+    }, this);
+
+    howToButton = this.add.image(400,275,'howToPlay').setScale(1.2);
+    howToButton.setInteractive({useHandCursor: true});
+    howToButton.on('pointerdown', function() {
+      this.scene.switch('Instructions');
+    }, this);
+  }
+
+  update(){
+    playButton1.on('pointerover', function() {
+      playButton1.setTintFill(0x450000);
+    }, this);
+
+    playButton1.on('pointerout', function() {
+      playButton1.clearTint();
+    }, this);
+
+    howToButton.on('pointerover', function() {
+      howToButton.setTintFill(0x450000);
+    }, this);
+
+    howToButton.on('pointerout', function() {
+      howToButton.clearTint();
     }, this);
   }
 }

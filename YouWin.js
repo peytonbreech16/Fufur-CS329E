@@ -1,3 +1,5 @@
+var playAgain1
+
 class YouWin extends Phaser.Scene{
   constructor(){
     super({key:'YouWin'});
@@ -10,8 +12,8 @@ class YouWin extends Phaser.Scene{
     this.load.image('back4', 'assets/background4.png');
     this.load.image('back5', 'assets/background5.png');
     this.load.image('back6', 'assets/background6.png');
-    this.load.image('youWon', 'assets/youWon.png');
-    this.load.image('playAgain', 'assets/playAgain.png');
+    this.load.image('youWon', 'assets/text/youWon.png');
+    this.load.image('playAgain', 'assets/text/playAgain.png');
   }
 
   create(){
@@ -42,11 +44,22 @@ class YouWin extends Phaser.Scene{
 
     this.add.image(400,90,'youWon').setScale(.9);
 
-    var playButton = this.add.image(400,200,'playAgain').setScale(.75);
-    playButton.setInteractive({useHandCursor: true});
-    playButton.on('pointerdown', function() {
+    playAgain1 = this.add.image(400,200,'playAgain').setScale(.75);
+    playAgain1.setInteractive({useHandCursor: true});
+    playAgain1.on('pointerdown', function() {
       location.reload();
       return false;
     }, this);
   }
+
+  update(){
+    playAgain1.on('pointerover', function() {
+      playAgain1.setTintFill(0x450000);
+    }, this);
+
+    playAgain1.on('pointerout', function() {
+      playAgain1.clearTint();
+    }, this);
+  }
+
 }
