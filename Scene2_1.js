@@ -35,6 +35,8 @@ class Scene2_1 extends Phaser.Scene
     {
         this.load.spritesheet('dude', 'assets/player.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('furfur', 'assets/furfur.png', { frameWidth: 90, frameHeight: 117 });
+        this.load.spritesheet('protect', 'assets/protection.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.image('orb', 'assets/orb.png');
         this.load.image('ground','assets/ground.png');
         this.load.image('tallTree','assets/tallTree.png');
         this.load.image('wideTree','assets/wideTree.png');
@@ -190,6 +192,23 @@ class Scene2_1 extends Phaser.Scene
           });
         }
 
+        // orbs that grant furfur immunity
+        orbs = this.physics.add.staticGroup();
+
+        //Player touching orbs
+        this.physics.add.overlap(player, orbs, this.pickUpOrb, null, this);
+
+        //Text for showing how many orbs player can use
+        orbText = this.add.text(16, 40, 'Orbs: ' + numOrbs, { fontSize: '32px', fill: '#ff0' });
+
+        // protection
+        protection = this.physics.add.sprite(playerX, playerY, 'protect');
+        protection.setVisible(false);
+        protection.disableBody(true,true);
+
+        space = this.input.keyboard.addKeys(
+            {use:Phaser.Input.Keyboard.KeyCodes.SPACE});
+
     }
 
     update()
@@ -200,6 +219,24 @@ class Scene2_1 extends Phaser.Scene
         movePlayer();
 
         moveFurfur();
+
+        if (space.use.isDown && orbs != 0)
+        {
+          isProtected = true;
+        }
+
+        if (isProtected && !protTimerOn){
+          numOrbs -= 1;
+          protTimerOn = true;
+          protTimeCounter = setInterval(protTimer, 1000); // countdown e
+        }
+
+        if (isProtected){
+          protection.setActive(true).setVisible(true);
+          protection.anims.play('on', true);
+          furfur.body.enable = false;
+          moveProtection();
+        }
     }
 
     //function for when the game needs to start over
@@ -228,6 +265,14 @@ class Scene2_1 extends Phaser.Scene
             musicPlaying = false;
         }
         scoreText.setText('Pieces Collected: ' + collectedPieces);
+    }
+
+    pickUpOrb(player, orbs)
+    {
+      orbs.destroy();
+      pickUpSFX.play();
+      numOrbs++;
+      orbText.setText('Orbs: ' + numOrbs);
     }
 
     moveRoomUp(player, topBorder)

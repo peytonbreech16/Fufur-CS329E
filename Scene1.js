@@ -20,6 +20,15 @@ var prevRoom; // room the player was previously in
 var musicPlaying = false;
 var furfurMusic;
 var pickUpSFX;
+var protection; // protection animation
+var isProtected = false; // can player can phase through furfur
+var protTimerOn = false; // is the timer running
+var protTime = 10; // 5 second protection
+var protTimeCounter; // setInterval() object
+var numOrbs = 0;
+var orbs;
+var orbText;
+var space;
 
 class Scene1 extends Phaser.Scene
 {
@@ -48,6 +57,7 @@ class Scene1 extends Phaser.Scene
     {
         this.load.spritesheet('dude', 'assets/player.png', { frameWidth: 64, frameHeight: 64 });
         this.load.spritesheet('furfur', 'assets/furfur.png', { frameWidth: 90, frameHeight: 117 });
+        this.load.spritesheet('protect', 'assets/protection.png', { frameWidth: 128, frameHeight: 128 });
         this.load.image('ground','assets/ground.png');
         this.load.image('tallTree','assets/tallTree.png');
         this.load.image('wideTree','assets/wideTree.png');
@@ -59,6 +69,7 @@ class Scene1 extends Phaser.Scene
         this.load.image('largeRock', 'assets/largeRock.png');
         this.load.image('bigStump', 'assets/bigStump.png');
         this.load.image('log', 'assets/log.png');
+        this.load.image('orb', 'assets/orb.png');
     }
 
     create()
@@ -283,6 +294,31 @@ class Scene1 extends Phaser.Scene
             },
           });
         }
+
+        // orbs that grant furfur immunity
+        orbs = this.physics.add.staticGroup();
+        orbs.create(300,150,'orb');
+
+        //Player touching orbs
+        this.physics.add.overlap(player, orbs, this.pickUpOrb, null, this);
+
+        //Text for showing how many orbs player can use
+        orbText = this.add.text(16, 40, 'Orbs: ' + numOrbs, { fontSize: '32px', fill: '#ff0' });
+
+        // protection
+        protection = this.physics.add.sprite(playerX, playerY, 'protect');
+        protection.setVisible(false);
+        protection.disableBody(true,true);
+
+        this.anims.create({
+          key:'on',
+          frames: this.anims.generateFrameNumbers('protect', { start: 0, end: 3 }),
+          frameRate: 12,
+          repeat: -1
+        });
+
+        space = this.input.keyboard.addKeys(
+            {use:Phaser.Input.Keyboard.KeyCodes.SPACE});
     }
 
     update()
@@ -293,6 +329,24 @@ class Scene1 extends Phaser.Scene
         movePlayer();
 
         moveFurfur();
+
+        if (space.use.isDown && orbs != 0)
+        {
+          isProtected = true;
+        }
+
+        if (isProtected && !protTimerOn){
+          numOrbs -= 1;
+          protTimerOn = true;
+          protTimeCounter = setInterval(protTimer, 1000); // countdown e
+        }
+
+        if (isProtected){
+          protection.setActive(true).setVisible(true);
+          protection.anims.play('on', true);
+          furfur.body.enable = false;
+          moveProtection();
+        }
     }
 
     //function for when the game needs to start over
@@ -331,6 +385,14 @@ class Scene1 extends Phaser.Scene
             musicPlaying = false;
         }
         scoreText.setText('Pieces Collected: ' + collectedPieces);
+    }
+
+    pickUpOrb(player, orbs)
+    {
+      orbs.destroy();
+      pickUpSFX.play();
+      numOrbs++;
+      orbText.setText('Orbs: ' + numOrbs);
     }
 
 
@@ -445,3 +507,27 @@ function setFurfurCoord()
       furfur.y = playerY + 250;
     }
   };
+
+function moveProtection()
+  {
+    protection.x = player.x;
+    protection.y = player.y;
+  };
+
+function protTimer()
+  {
+    console.log(protTime)
+    if (protTime > 0){
+      protTime = (protTime - 1);
+    }
+    else if (protTime == 0){
+      protection.setVisible(false);
+      protection.disableBody(true,true);
+      furfur.body.enable = true;
+      isProtected = false;
+      clearInterval(protTimeCounter);
+      protTimeCounter = false;
+      protTimerOn = false;
+      protTime = 10;
+    }
+  }
