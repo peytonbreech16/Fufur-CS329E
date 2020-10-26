@@ -229,7 +229,7 @@ class Scene1_2 extends Phaser.Scene
         //   furfur.body.enable = false;
         // }
 
-        if (space.use.isDown && orbs != 0)
+        if (space.use.isDown && numOrbs != 0)
         {
           isProtected = true;
         }

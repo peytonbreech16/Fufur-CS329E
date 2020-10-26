@@ -180,7 +180,7 @@ class Scene0_2 extends Phaser.Scene
             callback: () =>{
               furfur = this.physics.add.sprite(0, 0, 'furfur');
               furfur.setActive(true).setVisible(true);
-              furfur.body.enable = true;              
+              furfur.body.enable = true;
               //music playing for furfur spawn
               backgroundMusic.stop();
               furfurMusic.play();
@@ -221,7 +221,7 @@ class Scene0_2 extends Phaser.Scene
 
         moveFurfur();
 
-        if (space.use.isDown && orbs != 0)
+        if (space.use.isDown && numOrbs != 0)
         {
           isProtected = true;
         }

@@ -232,7 +232,7 @@ class Scene3_1 extends Phaser.Scene
 
         moveFurfur();
 
-        if (space.use.isDown && orbs != 0)
+        if (space.use.isDown && numOrbs != 0)
         {
           isProtected = true;
         }

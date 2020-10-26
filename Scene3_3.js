@@ -61,12 +61,12 @@ class Scene3_3 extends Phaser.Scene
         trees = this.physics.add.staticGroup();
         puzzlePieces = this.physics.add.staticGroup();
 
-        for (var i=0; i <= 850; i+=90) 
+        for (var i=0; i <= 850; i+=90)
         {
             trees.create(i,52,'tallTree');
         };
 
-        for (var i=120; i <= 700; i+=90) 
+        for (var i=120; i <= 700; i+=90)
         {
             trees.create(0,i,'tallTree');
             trees.create(90,i,'tallTree');
@@ -84,7 +84,7 @@ class Scene3_3 extends Phaser.Scene
 
         for (var i=550; i < 900; i+=90)
         {
-            trees.create(i+90,450,'tallTree');   
+            trees.create(i+90,450,'tallTree');
             trees.create(i,530,'tallTree');
         };
 
@@ -217,7 +217,7 @@ class Scene3_3 extends Phaser.Scene
 
         moveFurfur();
 
-        if (space.use.isDown && orbs != 0)
+        if (space.use.isDown && numOrbs != 0)
         {
           isProtected = true;
         }
