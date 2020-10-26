@@ -33,7 +33,7 @@ class Scene1_4 extends Phaser.Scene
 
     preload()
     {
-        this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('dude', 'assets/player.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('furfur', 'assets/furfur.png', { frameWidth: 90, frameHeight: 117 });
         this.load.spritesheet('protect', 'assets/protection.png', { frameWidth: 128, frameHeight: 128 });
         this.load.image('orb', 'assets/orb.png');
