@@ -9,11 +9,11 @@ var bottomBorder;
 var leftBorder;
 var rightBorder;
 
-class Scene3_2 extends Phaser.Scene
+class Scene3_3 extends Phaser.Scene
 {
     constructor()
     {
-        super("Scene3_2");
+        super("Scene3_3");
     }
 
     init(data)
@@ -44,8 +44,6 @@ class Scene3_2 extends Phaser.Scene
         this.load.audio('FurfurMusic',['assets/FurfurMusic.mp3']);
         this.load.audio('pickUp',['assets/PickUp_1.wav']);
         this.load.image('salt', 'assets/salt.png');
-        this.load.image('bigStump', 'assets/bigStump.png');
-        this.load.image('log', 'assets/log.png');
     }
 
     create ()
@@ -63,43 +61,32 @@ class Scene3_2 extends Phaser.Scene
         trees = this.physics.add.staticGroup();
         puzzlePieces = this.physics.add.staticGroup();
 
-        for (var i=0; i <= 850; i+=90)
+        for (var i=0; i <= 850; i+=90) 
         {
             trees.create(i,52,'tallTree');
         };
-        for (var i=100; i <= 500; i+=100)
+
+        for (var i=120; i <= 700; i+=90) 
         {
-            trees.create(750,i,'tallTree');
+            trees.create(0,i,'tallTree');
+            trees.create(90,i,'tallTree');
+            trees.create(180,i,'tallTree');
+
         };
 
-        for (var i=0; i <= 270; i+=90)
+        var tree1 = trees.create(780,120,'tallTree');
+        tree1.body.setCircle(50);
+        tree1.body.setOffset(10, 0);
+
+        var tree2 = trees.create(550,450,'tallTree');
+        tree2.body.setCircle(50);
+        tree2.body.setOffset(10, -5);
+
+        for (var i=550; i < 900; i+=90)
         {
-            trees.create(i+5,295,'tallTree');
-            trees.create(i+5,350,'tallTree');
-            trees.create(i+5,400,'tallTree');
-            trees.create(i+5,450,'tallTree');
+            trees.create(i+90,450,'tallTree');   
+            trees.create(i,530,'tallTree');
         };
-
-        trees.create(30,365,'tallTree');
-        trees.create(30,480,'tallTree');
-        trees.create(775,480,'tallTree');
-        trees.create(725,525,'tallTree');
-        trees.create(10,560,'tallTree');
-        trees.create(100,540,'tallTree');
-        trees.create(190,540,'tallTree');
-        trees.create(280,540,'tallTree');
-        trees.create(523,560,'tallTree');
-        trees.create(600,560,'tallTree');
-        trees.create(689,560,'tallTree');
-        trees.create(780,560,'tallTree');
-
-        var stump1 = trees.create(480,250,'bigStump');
-        stump1.body.setCircle(30);
-        stump1.body.setOffset(25, -5);
-
-        var log1 = trees.create(480,175,'log');
-        log1.setScale(3);
-
 
         //puzzle pieces
 
@@ -131,13 +118,13 @@ class Scene3_2 extends Phaser.Scene
             right:Phaser.Input.Keyboard.KeyCodes.D});
 
         // room change objects
-        bottomBorder = this.add.rectangle(400,600,200,25, 0xFF0000);
+        bottomBorder = this.add.rectangle(380,600,300,25, 0xFF0000);
         this.physics.add.existing(bottomBorder);
         this.physics.add.overlap(player, bottomBorder, this.moveRoomDown, null, this);
 
-        leftBorder = this.add.rectangle(0,200,25,150, 0xFF0000);
-        this.physics.add.existing(leftBorder);
-        this.physics.add.overlap(player, leftBorder, this.moveRoomLeft, null, this);
+        rightBorder = this.add.rectangle(800, 300, 25, 200, 0xFF0000);
+        this.physics.add.existing(rightBorder);
+        this.physics.add.overlap(player, rightBorder, this.moveRoomRight, null, this);
 
         // furfur is chasing player
         if (furfurSpawned && roomsTraversed < 3){
@@ -198,26 +185,26 @@ class Scene3_2 extends Phaser.Scene
                 setFurfurCoord();
                 furfur.setCollideWorldBounds(true);
                 furfurSpawned = true;
-            },
-          });
-        }
+              },
+            });
+          }
 
-        // orbs that grant furfur immunity
-        orbs = this.physics.add.staticGroup();
+          // orbs that grant furfur immunity
+          orbs = this.physics.add.staticGroup();
 
-        //Player touching orbs
-        this.physics.add.overlap(player, orbs, this.pickUpOrb, null, this);
+          //Player touching orbs
+          this.physics.add.overlap(player, orbs, this.pickUpOrb, null, this);
 
-        //Text for showing how many orbs player can use
-        orbText = this.add.text(16, 40, 'Orbs: ' + numOrbs, { fontSize: '32px', fill: '#ff0' });
+          //Text for showing how many orbs player can use
+          orbText = this.add.text(16, 40, 'Orbs: ' + numOrbs, { fontSize: '32px', fill: '#ff0' });
 
-        // protection
-        protection = this.physics.add.sprite(playerX, playerY, 'protect');
-        protection.setVisible(false);
-        protection.disableBody(true,true);
+          // protection
+          protection = this.physics.add.sprite(playerX, playerY, 'protect');
+          protection.setVisible(false);
+          protection.disableBody(true,true);
 
-        space = this.input.keyboard.addKeys(
-            {use:Phaser.Input.Keyboard.KeyCodes.SPACE});
+          space = this.input.keyboard.addKeys(
+              {use:Phaser.Input.Keyboard.KeyCodes.SPACE});
 
     }
 
@@ -287,25 +274,25 @@ class Scene3_2 extends Phaser.Scene
 
     moveRoomUp(player, topBorder)
     {
-        prevRoom = "Scene3_2";
-        this.scene.start("Scene1", {x: playerX, y: 550});
+        prevRoom = "Scene3_3";
+        this.scene.start("Scene4_3", {x: playerX, y: 550});
     }
 
     moveRoomDown(player, bottomBorder)
     {
-        prevRoom = "Scene3_2";
-        this.scene.start("Scene2_2", {x: playerX, y: 50});
+        prevRoom = "Scene3_3";
+        this.scene.start("Scene2_3", {x: playerX, y: 50});
     }
 
     moveRoomLeft(player, leftBorder)
     {
-        prevRoom = "Scene3_2";
-        this.scene.start("Scene3_1", {x: 750, y: playerY});
+        prevRoom = "Scene3_3";
+        this.scene.start("Scene3_2", {x: 750, y: playerY});
     }
 
     moveRoomRight(player, rightBorder)
     {
-        prevRoom = "Scene3_2";
-        this.scene.start("Scene1", {x: 50, y: playerY});
+        prevRoom = "Scene3_3";
+        this.scene.start("Scene3_4", {x: 50, y: playerY});
     }
 };

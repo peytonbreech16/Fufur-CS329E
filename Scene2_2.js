@@ -117,7 +117,6 @@ class Scene2_2 extends Phaser.Scene
             right:Phaser.Input.Keyboard.KeyCodes.D});
 
         // room change objects
-
         topBorder = this.add.rectangle(400,0,200,25, 0xFF0000);
         this.physics.add.existing(topBorder);
         this.physics.add.overlap(player, topBorder, this.moveRoomUp, null, this);
@@ -129,6 +128,10 @@ class Scene2_2 extends Phaser.Scene
         leftBorder = this.add.rectangle(0,275,25,300, 0xFF0000);
         this.physics.add.existing(leftBorder);
         this.physics.add.overlap(player, leftBorder, this.moveRoomLeft, null, this);
+
+        rightBorder = this.add.rectangle(800, 250, 25, 300, 0xFF0000);
+        this.physics.add.existing(rightBorder);
+        this.physics.add.overlap(player, rightBorder, this.moveRoomRight, null, this);
 
         // furfur is chasing player
         if (furfurSpawned && roomsTraversed < 3){
@@ -297,6 +300,6 @@ class Scene2_2 extends Phaser.Scene
     moveRoomRight(player, rightBorder)
     {
         prevRoom = "Scene2_2";
-        this.scene.start("Scene1", {x: 50, y: playerY});
+        this.scene.start("Scene2_3", {x: 50, y: playerY});
     }
 };

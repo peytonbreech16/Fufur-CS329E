@@ -95,7 +95,6 @@ class Scene1_3 extends Phaser.Scene
         stump1.body.setCircle(30);
         stump1.body.setOffset(25, -5);
 
-
         //puzzle pieces
 
         // The player and its settings
@@ -126,6 +125,9 @@ class Scene1_3 extends Phaser.Scene
             right:Phaser.Input.Keyboard.KeyCodes.D});
 
         // room change objects
+        topBorder = this.add.rectangle(330,0,300,25, 0xFF0000);
+        this.physics.add.existing(topBorder);
+        this.physics.add.overlap(player, topBorder, this.moveRoomUp, null, this);
 
         bottomBorder = this.add.rectangle(250,600,300,25, 0xFF0000);
         this.physics.add.existing(bottomBorder);
