@@ -107,7 +107,7 @@ class Scene3_3 extends Phaser.Scene
         this.physics.add.overlap(player, puzzlePieces, this.pickUpPiece, null, this);
 
         //Text for showing how many puzzle pieces collected
-        scoreText = this.add.text(16, 16, 'Pieces Collected: ' + collectedPieces, { fontSize: '32px', fill: '#ff0' });
+        scoreText = this.add.text(16, 16, 'Pieces Collected: ' + collectedPieces + '/3', { fontSize: '32px', fill: '#ff0' });
 
         //  Input Events
         cursors = this.input.keyboard.createCursorKeys();
@@ -261,7 +261,7 @@ class Scene3_3 extends Phaser.Scene
             furfurSpawned = false;
             musicPlaying = false;
         }
-        scoreText.setText('Pieces Collected: ' + collectedPieces);
+        scoreText.setText('Pieces Collected: ' + collectedPieces + '/3');
     }
 
     pickUpOrb(player, orbs)

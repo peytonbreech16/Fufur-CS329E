@@ -113,7 +113,7 @@ class Scene2_1 extends Phaser.Scene
         this.physics.add.overlap(player, puzzlePieces, this.pickUpPiece, null, this);
 
         //Text for showing how many puzzle pieces collected
-        scoreText = this.add.text(16, 16, 'Pieces Collected: ' + collectedPieces, { fontSize: '32px', fill: '#ff0' });
+        scoreText = this.add.text(16, 16, 'Pieces Collected: ' + collectedPieces + '/3', { fontSize: '32px', fill: '#ff0' });
 
         //  Input Events
         cursors = this.input.keyboard.createCursorKeys();
@@ -156,9 +156,11 @@ class Scene2_1 extends Phaser.Scene
           });
           roomsTraversed = roomsTraversed + 1;
         }
-        else if (furfurSpawned == true && roomsTraversed == 3){
+        else if (furfurSpawned && roomsTraversed == 3){
           roomsTraversed = 0;
           furfurSpawned = false;
+          furfurMusic.stop();
+          backgroundMusic.play();
         }
 
         if (!furfurSpawned){
@@ -182,7 +184,10 @@ class Scene2_1 extends Phaser.Scene
             callback: () =>{
               furfur = this.physics.add.sprite(0, 0, 'furfur');
               furfur.setActive(true).setVisible(true);
-              furfur.body.enable = true;
+              furfur.body.enable = true;              
+              //music playing for furfur spawn
+              backgroundMusic.stop();
+              furfurMusic.play();
               furfurSpawned = true;
               this.physics.add.overlap(player, furfur, this.startOver, null, this);
               setFurfurCoord();
@@ -264,7 +269,7 @@ class Scene2_1 extends Phaser.Scene
             furfurSpawned = false;
             musicPlaying = false;
         }
-        scoreText.setText('Pieces Collected: ' + collectedPieces);
+        scoreText.setText('Pieces Collected: ' + collectedPieces + '/3');
     }
 
     pickUpOrb(player, orbs)
