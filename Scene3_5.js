@@ -66,7 +66,7 @@ class Scene3_5 extends Phaser.Scene
         tree1.body.setOffset(-10, -5);
 
         var log1 = trees.create(620,450,'log');
-        log1.setScale(3.5);
+        //log1.setScale(3.5);
         log1.setCircle(50);
 
         for (var i=0; i < 900; i+=90)

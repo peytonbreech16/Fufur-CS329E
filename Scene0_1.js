@@ -36,6 +36,7 @@ class Scene0_1 extends Phaser.Scene
         this.load.spritesheet('dude', 'assets/player.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('furfur', 'assets/furfur.png', { frameWidth: 90, frameHeight: 117 });
         this.load.spritesheet('protect', 'assets/protection.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('blood', 'assets/blood.png', { frameWidth: 160, frameHeight: 128 });
         this.load.image('orb', 'assets/orb.png');
         this.load.image('ground','assets/ground.png');
         this.load.image('tallTree','assets/tallTree.png');
@@ -45,6 +46,9 @@ class Scene0_1 extends Phaser.Scene
         this.load.audio('pickUp',['assets/PickUp_1.wav']);
         this.load.image('salt', 'assets/salt.png');
         this.load.image('bigStump', 'assets/bigStump.png');
+        this.load.image('path', 'assets/horizStonePath.png');
+        this.load.image('dirt', 'assets/dirtPatch.png');
+        this.load.image('grass', 'assets/grassPatch.png');
     }
 
     create ()
@@ -91,6 +95,24 @@ class Scene0_1 extends Phaser.Scene
 
         var stump2 = trees.create(160,370,'bigStump');
         stump2.setScale(1.25);
+
+        this.add.image(280,375,'path').setScale(1.3);
+        this.add.image(340,375,'path').setScale(1.3);
+        this.add.image(400,375,'path').setScale(1.3);
+        this.add.image(460,375,'path').setScale(1.3);
+        this.add.image(520,375,'path').setScale(1.3);
+
+        this.add.image(160,260,'dirt').setScale(1.3);
+        this.add.image(680,200,'dirt').setScale(1).flipX.flipY;
+        this.add.image(670,185,'dirt').setScale(1.2).flipY;
+
+        var blood = this.add.sprite(420,60,'blood').setScale(.5);
+        blood.setFrame(3);
+        blood.flipY = true;
+
+        this.add.image(600,325,'grass');
+        var grass = this.add.image(240,150,'grass');
+        grass.flipX = true;
 
         //puzzle pieces
 

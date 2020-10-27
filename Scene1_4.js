@@ -94,12 +94,12 @@ class Scene1_4 extends Phaser.Scene
 
         var rocks = this.physics.add.staticGroup();
         var rock1 = rocks.create(420,280,'largeRock');
-        rocks.scaleXY(3);
+        //rocks.scaleXY(3);
         rock1.body.setCircle(20);
-        rock1.body.setOffset(-25, -15);
+        //rock1.body.setOffset(-25, -15);
 
         var log1 = trees.create(300,550,'log');
-        log1.setScale(3);
+        //log1.setScale(3);
 
         //puzzle pieces
         puzzlePieces.create(600,200,'salt');

@@ -98,7 +98,7 @@ class Scene3_2 extends Phaser.Scene
         stump1.body.setOffset(25, -5);
 
         var log1 = trees.create(480,175,'log');
-        log1.setScale(3);
+        //log1.setScale(3);
 
 
         //puzzle pieces
