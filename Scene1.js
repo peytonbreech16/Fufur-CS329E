@@ -56,7 +56,7 @@ class Scene1 extends Phaser.Scene
     preload()
     {
         this.load.spritesheet('dude', 'assets/player.png', { frameWidth: 64, frameHeight: 64 });
-        this.load.spritesheet('furfur', 'assets/furfur.png', { frameWidth: 90, frameHeight: 117 });
+        this.load.spritesheet('furfur', 'assets/demon.png', {frameWidth: 200, frameHeight: 155});
         this.load.spritesheet('protect', 'assets/protection.png', { frameWidth: 128, frameHeight: 128 });
         this.load.image('ground','assets/ground.png');
         this.load.image('tallTree','assets/tallTree.png');
@@ -186,34 +186,28 @@ class Scene1 extends Phaser.Scene
         // Furfur animations
         this.anims.create({
             key: 'furfur_left',
-            frames: [{key: 'furfur', frame:0}],
+            frames: this.anims.generateFrameNumbers('furfur', { start: 0, end: 4 }),
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
-            key: 'turn',
-            frames: [{key: 'furfur', frame:1}],
-            frameRate: 20
-        });
-
-        this.anims.create({
             key: 'furfur_right',
-            frames: [{key: 'furfur', frame:0}],
+            frames: this.anims.generateFrameNumbers('furfur', { start: 0, end: 4 }),
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
             key: 'furfur_up',
-            frames: [{key: 'furfur', frame:2}],
+            frames: this.anims.generateFrameNumbers('furfur', { start: 9, end: 12 }),
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
             key: 'furfur_down',
-            frames: [{key: 'furfur', frame:1}],
+            frames: this.anims.generateFrameNumbers('furfur', { start: 5, end: 8 }),
             frameRate: 10,
             repeat: -1
         });
@@ -235,7 +229,7 @@ class Scene1 extends Phaser.Scene
         // furfur is chasing player
         if (furfurSpawned && roomsTraversed < 3){
           this.time.addEvent({
-            delay: 750,
+            delay: 1000,
 
             // spawn furfur
             callback: () =>{
@@ -462,29 +456,61 @@ function movePlayer()
 function moveFurfur()
     {
         // furfur movement
-        if (furfur.x > player.x+2)
+        if ((furfur.x < player.x-2) && (furfur.y < player.y-2))
+        {
+            furfur.x += 2;
+            furfur.y += 2;
+            furfur.anims.play('furfur_right', true);
+            furfur.flipX = false;
+        }
+
+        else if ((furfur.x < player.x-2) && (furfur.y > player.y-2))
+        {
+            furfur.x += 2;
+            furfur.y -= 2;
+            furfur.anims.play('furfur_right', true);
+            furfur.flipX = false;
+        }
+
+        else if ((furfur.x > player.x-2) && (furfur.y > player.y-2))
         {
             furfur.x -= 2;
-            furfur.anims.play('furfur_left');
-            furfur.flipX = false;
+            furfur.y -= 2;
+            furfur.anims.play('furfur_left', true);
+            furfur.flipX = true;
+        }
+
+        else if ((furfur.x > player.x-2) && (furfur.y < player.y-2))
+        {
+            furfur.x -= 2;
+            furfur.y += 2;
+            furfur.anims.play('furfur_left', true);
+            furfur.flipX = true;
+        }
+
+        else if (furfur.y > player.y+2)
+        {
+            furfur.y -= 2;
+            furfur.anims.play('furfur_up', true);
+        }
+        else if (furfur.y < player.y-2)
+        {
+            furfur.y += 2;
+            furfur.anims.play('furfur_down', true);
+        }
+
+        else if (furfur.x > player.x+2)
+        {
+            furfur.x -= 2;
+            furfur.anims.play('furfur_left', true);
+            furfur.flipX = true;
         }
 
         else if (furfur.x < player.x-2)
         {
             furfur.x += 2;
-            furfur.anims.play('furfur_right');
-            furfur.flipX = true;
-        }
-
-        if (furfur.y > player.y+2)
-        {
-            furfur.y -= 2;
-            furfur.anims.play('furfur_up');
-        }
-        else if (furfur.y < player.y-2)
-        {
-            furfur.y += 2;
-            furfur.anims.play('furfur_down');
+            furfur.anims.play('furfur_right', true);
+            furfur.flipX = false;
         }
     };
 

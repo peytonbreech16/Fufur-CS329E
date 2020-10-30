@@ -34,7 +34,7 @@ class Scene3_5 extends Phaser.Scene
     preload()
     {
         this.load.spritesheet('dude', 'assets/player.png', { frameWidth: 32, frameHeight: 48 });
-        this.load.spritesheet('furfur', 'assets/furfur.png', { frameWidth: 90, frameHeight: 117 });
+        this.load.spritesheet('furfur', 'assets/demon.png', {frameWidth: 200, frameHeight: 155});
         this.load.spritesheet('protect', 'assets/protection.png', { frameWidth: 128, frameHeight: 128 });
         this.load.image('orb', 'assets/orb.png');
         this.load.image('ground','assets/ground.png');
@@ -135,7 +135,7 @@ class Scene3_5 extends Phaser.Scene
         // furfur is chasing player
         if (furfurSpawned && roomsTraversed < 3){
             this.time.addEvent({
-              delay: 750,
+              delay: 1000,
 
               // spawn furfur
               callback: () =>{
