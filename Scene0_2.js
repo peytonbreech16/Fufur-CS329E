@@ -108,11 +108,12 @@ class Scene0_2 extends Phaser.Scene
         dirt.flipY = true;
         this.add.image(700,280,'dirt').setScale(1.3);
 
-        this.add.image(410,200,'grass');
+        this.add.image(600,175,'grass');
+        this.add.image(750,400,'grass');
         var grass = this.add.image(460,210,'grass');
         grass.flipY = true;
         grass.flipX = true;
-        grass = this.add.image(320,250,'grass');
+        grass = this.add.image(120,250,'grass');
         grass.flipY = true;
 
         //puzzle pieces

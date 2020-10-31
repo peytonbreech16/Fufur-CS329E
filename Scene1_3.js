@@ -45,6 +45,9 @@ class Scene1_3 extends Phaser.Scene
         this.load.audio('pickUp',['assets/PickUp_1.wav']);
         this.load.image('salt', 'assets/salt.png');
         this.load.image('bigStump', 'assets/bigStump.png');
+        this.load.image('hPath', 'assets/horizStonePath.png');
+        this.load.image('grass', 'assets/grassPatch.png');
+        this.load.image('dirt', 'assets/dirtPatch.png');
     }
 
     create ()
@@ -94,6 +97,27 @@ class Scene1_3 extends Phaser.Scene
         var stump1 = trees.create(430,240,'bigStump');
         stump1.body.setCircle(30);
         stump1.body.setOffset(25, -5);
+
+        this.add.image(550,245,'hPath').setScale(1.3);
+        this.add.image(610,245,'hPath').setScale(1.3);
+        this.add.image(670,245,'hPath').setScale(1.3);
+        this.add.image(730,245,'hPath').setScale(1.3);
+        this.add.image(790,245,'hPath').setScale(1.3);
+
+        var grass = this.add.image(140,170,'grass');
+        grass.flipX = true;
+        grass = this.add.image(70,400,'grass');
+        grass.flipY = true;
+        this.add.image(340,530,'grass');
+        grass = this.add.image(400,100,'grass');
+        grass.flipX = true;
+        grass.flipY = true;
+        this.add.image(515,330,'grass');
+
+        this.add.image(215,360,'dirt').setScale(1.8);
+        var dirt = this.add.image(215,380,'dirt').setScale(1.8);
+        dirt.flipY = true;
+        dirt.flipX = true
 
         //puzzle pieces
 

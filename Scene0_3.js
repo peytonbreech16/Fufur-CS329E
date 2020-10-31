@@ -141,6 +141,9 @@ class Scene0_3 extends Phaser.Scene
         this.add.image(470,140,'hPath').setScale(1.3);
 
         this.add.image(200,90,'dirt');
+        this.add.image(550,140,'dirt').setScale(1.3);
+        var dirt = this.add.image(540,140,'dirt').setScale(1.1);
+        dirt.flipX = true;
 
         this.add.image(150,400,'grass');
         var grass = this.add.image(300,380,'grass');

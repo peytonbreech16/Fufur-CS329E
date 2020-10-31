@@ -36,6 +36,7 @@ class Scene1_4 extends Phaser.Scene
         this.load.spritesheet('dude', 'assets/player.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('furfur', 'assets/demon.png', {frameWidth: 200, frameHeight: 155});
         this.load.spritesheet('protect', 'assets/protection.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('blood', 'assets/blood.png', { frameWidth: 160, frameHeight: 128 });
         this.load.image('orb', 'assets/orb.png');
         this.load.image('ground','assets/ground.png');
         this.load.image('tallTree','assets/tallTree.png');
@@ -45,6 +46,9 @@ class Scene1_4 extends Phaser.Scene
         this.load.audio('pickUp',['assets/PickUp_1.wav']);
         this.load.image('salt', 'assets/salt.png');
         this.load.image('bigStump', 'assets/bigStump.png');
+        this.load.image('vPath', 'assets/vertStonePath.png');
+        this.load.image('hPath', 'assets/horizStonePath.png');
+        this.load.image('grass', 'assets/grassPatch.png');
     }
 
     create ()
@@ -94,12 +98,31 @@ class Scene1_4 extends Phaser.Scene
 
         var rocks = this.physics.add.staticGroup();
         var rock1 = rocks.create(420,280,'largeRock');
-        //rocks.scaleXY(3);
         rock1.body.setCircle(20);
         //rock1.body.setOffset(-25, -15);
 
+        this.add.image(0,230,'hPath').setScale(1.3);
+        this.add.image(60,230,'hPath').setScale(1.3);
+        this.add.image(120,230,'hPath').setScale(1.3);
+        this.add.image(180,230,'hPath').setScale(1.3);
+        this.add.image(240,230,'hPath').setScale(1.3);
+        this.add.image(300,230,'hPath').setScale(1.3);
+        this.add.image(300,290,'vPath').setScale(1.3);
+        this.add.image(300,350,'vPath').setScale(1.3);
+        this.add.image(300,410,'vPath').setScale(1.3);
+        this.add.image(300,470,'vPath').setScale(1.3);
+        this.add.image(300,530,'vPath').setScale(1.3);
+
         var log1 = trees.create(300,550,'log');
-        //log1.setScale(3);
+
+        var grass = this.add.image(235,270,'grass');
+        grass.flipX = true;
+        grass = this.add.image(470,320,'grass');
+        grass.flipY = true;
+        this.add.image(550,210,'grass');
+
+        var blood = this.add.sprite(640,245,'blood');
+        blood.setFrame(1);
 
         //puzzle pieces
         puzzlePieces.create(600,200,'salt');

@@ -70,6 +70,10 @@ class Scene1 extends Phaser.Scene
         this.load.image('bigStump', 'assets/bigStump.png');
         this.load.image('log', 'assets/log.png');
         this.load.image('orb', 'assets/orb.png');
+        this.load.image('hPath', 'assets/horizStonePath.png');
+        this.load.image('vPath', 'assets/vertStonePath.png');
+        this.load.image('dirt', 'assets/dirtPatch.png');
+        this.load.image('grass', 'assets/grassPatch.png');
     }
 
     create()
@@ -117,6 +121,34 @@ class Scene1 extends Phaser.Scene
         rocks.create(500,200,'medRock');
         rocks.create(500,400,'medRock');
         rocks.scaleXY(1);
+
+        this.add.image(100,160,'vPath').setScale(1.3);
+        this.add.image(140,160,'vPath').setScale(1.3);
+        this.add.image(180,160,'vPath').setScale(1.3);
+        this.add.image(220,160,'vPath').setScale(1.3);
+        var path = this.add.image(100,200,'vPath').setScale(1.3);
+        path.flipY = true;
+        path = this.add.image(140,200,'vPath').setScale(1.3);
+        path.flipY = true;
+        path = this.add.image(180,200,'vPath').setScale(1.3);
+        path.flipY = true;
+        path = this.add.image(220,200,'vPath').setScale(1.3);
+        path.flipY = true;
+        this.add.image(160,260,'vPath').setScale(1.3);
+        this.add.image(160,300,'vPath').setScale(1.3);
+        this.add.image(210,300,'hPath').setScale(1.3);
+        this.add.image(250,300,'hPath').setScale(1.3);
+
+        this.add.image(210,500,'dirt').setScale(1.5);
+        this.add.image(190,480,'dirt').setScale(1.5);
+        this.add.image(650,180,'dirt');
+
+        var grass = this.add.image(580,160,'grass');
+        grass.flipX = true;
+        grass = this.add.image(470,460,'grass');
+        grass.flipX = true;
+        grass.flipY = true;
+        this.add.image(750,400,'grass');
 
         //puzzle pieces
         puzzlePieces.create(600,400,'salt');

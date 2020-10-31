@@ -110,7 +110,8 @@ class Scene0_1 extends Phaser.Scene
         blood.setFrame(3);
         blood.flipY = true;
 
-        this.add.image(600,325,'grass');
+        this.add.image(620,325,'grass');
+        this.add.image(560,125,'grass');
         var grass = this.add.image(240,150,'grass');
         grass.flipX = true;
 
