@@ -44,6 +44,8 @@ class Scene2_3 extends Phaser.Scene
         this.load.audio('FurfurMusic',['assets/FurfurMusic.mp3']);
         this.load.audio('pickUp',['assets/PickUp_1.wav']);
         this.load.image('salt', 'assets/salt.png');
+        this.load.image('dirt', 'assets/dirtPatch.png');
+        this.load.image('grass', 'assets/grassPatch.png');
     }
 
     create ()
@@ -91,6 +93,21 @@ class Scene2_3 extends Phaser.Scene
             trees.create(i,260,'tallTree');
             trees.create(i,310,'tallTree');
         };
+
+        var dirt = this.add.image(290,510,'dirt').setScale(1.5);
+        dirt.flipX = true;
+        this.add.image(710,235,'dirt');
+        dirt = this.add.image(80,170,'dirt').setScale(1.2);
+        dirt.flipY = true;
+
+        var grass = this.add.image(120,330,'grass');
+        grass.flipX = true;
+        grass = this.add.image(310,130,'grass');
+        grass.flipY = true;
+        this.add.image(420,85,'grass');
+        grass = this.add.image(610,415,'grass');
+        grass.flipX = true;
+        grass.flipY = true;
 
         //puzzle pieces
 

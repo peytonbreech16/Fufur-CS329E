@@ -36,6 +36,7 @@ class Scene2_2 extends Phaser.Scene
         this.load.spritesheet('dude', 'assets/player.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('furfur', 'assets/demon.png', {frameWidth: 200, frameHeight: 155});
         this.load.spritesheet('protect', 'assets/protection.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('blood', 'assets/blood.png', { frameWidth: 160, frameHeight: 128 });
         this.load.image('orb', 'assets/orb.png');
         this.load.image('ground','assets/ground.png');
         this.load.image('tallTree','assets/tallTree.png');
@@ -44,6 +45,8 @@ class Scene2_2 extends Phaser.Scene
         this.load.audio('FurfurMusic',['assets/FurfurMusic.mp3']);
         this.load.audio('pickUp',['assets/PickUp_1.wav']);
         this.load.image('salt', 'assets/salt.png');
+        this.load.image('dirt', 'assets/dirtPatch.png');
+        this.load.image('grass', 'assets/grassPatch.png');
     }
 
     create ()
@@ -69,6 +72,9 @@ class Scene2_2 extends Phaser.Scene
         trees.create(780,52,'tallTree');
         trees.create(25,480,'tallTree');
         trees.create(75,525,'tallTree');
+        var tree = trees.create(540,450,'tallTree');
+        tree.body.setCircle(55);
+        tree.body.setOffset(0,-3);
         trees.create(610,450,'tallTree');
         trees.create(690,450,'tallTree');
         trees.create(775,450,'tallTree');
@@ -78,14 +84,40 @@ class Scene2_2 extends Phaser.Scene
         trees.create(580,525,'tallTree');
         trees.create(650,525,'tallTree');
         trees.create(523,52,'tallTree');
+        tree = trees.create(400,270,'wideTree');
+        tree.body.setCircle(60);
 
-        var tree1 = trees.create(400,270,'wideTree');
-        tree1.body.setCircle(60);
+        var blood = this.add.sprite(280,300,'blood').setScale(1.2);
+        blood.flipX = true;
+        blood.flipY = true;
+        blood = this.add.sprite(300,265,'blood');
+        blood.setFrame(4);
+        blood = this.add.sprite(330,175,'blood').setScale(0.8);
+        blood.setFrame(5);
+        blood.flipX = true;
+        blood = this.add.sprite(385,130,'blood').setScale(0.8);
+        blood.setFrame(5);
+        blood.flipX = true;
+        blood.flipY = true;
+        blood = this.add.sprite(385,50,'blood').setScale(0.8);
+        blood.setFrame(5);
+        blood = this.add.sprite(395,85,'blood').setScale(0.8);
+        blood.setFrame(5);
+        blood.flipY = true;
 
-        var tree2 = trees.create(540,450,'tallTree');
-        tree2.body.setCircle(55);
-        tree2.body.setOffset(0,-3);
+        this.add.image(305,500,'dirt').setScale(1.5);
+        var dirt = this.add.image(305,520,'dirt').setScale(1.8);
+        dirt.flipY = true;
+        dirt.flipX = true
+        this.add.image(660,175,'dirt').setScale(1.3);
+        dirt.flipY = true;
+        this.add.image(65,240,'dirt').setScale(1.3);
 
+        var grass = this.add.image(180,360,'grass');
+        grass.flipX = true;
+        grass = this.add.image(495,200,'grass');
+        grass.flipY = true;
+        this.add.image(740,320,'grass');
 
         //puzzle pieces
 
