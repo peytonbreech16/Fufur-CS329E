@@ -129,7 +129,7 @@ class Scene1_4 extends Phaser.Scene
         {
           puzzlePieces.create(600,200,'candle');
         }
-        
+
         // The player and its settings
         player = this.physics.add.sprite(this.playerSpawnX, this.playerSpawnY, 'dude');
 
@@ -292,10 +292,8 @@ class Scene1_4 extends Phaser.Scene
         itemCollected3 = true;
         if (collectedPieces >= 3)
         {
-            this.scene.switch('YouWin');
             backgroundMusic.stop();
             furfurMusic.stop();
-            collectedPieces = 0;
             furfurSpawned = false;
             musicPlaying = false;
         }

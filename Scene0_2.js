@@ -117,6 +117,10 @@ class Scene0_2 extends Phaser.Scene
         grass.flipY = true;
 
         //puzzle pieces
+        if (!itemCollected1)
+        {
+          puzzlePieces.create(625,365,'salt');
+        }
 
         // The player and its settings
         player = this.physics.add.sprite(this.playerSpawnX, this.playerSpawnY, 'dude');
@@ -278,14 +282,13 @@ class Scene0_2 extends Phaser.Scene
         puzzlePieces.destroy();
         pickUpSFX.play();
         collectedPieces++;
+        itemCollected1 = true;
         if (collectedPieces >= 3)
         {
-            this.scene.switch('YouWin');
-            backgroundMusic.stop();
-            furfurMusic.stop();
-            collectedPieces = 0;
+            //backgroundMusic.stop();
+            //furfurMusic.stop();
             furfurSpawned = false;
-            musicPlaying = false;
+            //musicPlaying = false;
         }
         scoreText.setText('Pieces Collected: ' + collectedPieces + '/3');
     }

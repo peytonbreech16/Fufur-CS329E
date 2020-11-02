@@ -284,12 +284,10 @@ class Scene3_1 extends Phaser.Scene
         collectedPieces++;
         if (collectedPieces >= 3)
         {
-            this.scene.switch('YouWin');
-            backgroundMusic.stop();
-            furfurMusic.stop();
-            collectedPieces = 0;
+            // backgroundMusic.stop();
+            // furfurMusic.stop();
             furfurSpawned = false;
-            musicPlaying = false;
+            //musicPlaying = false;
         }
         scoreText.setText('Pieces Collected: ' + collectedPieces + '/3');
     }

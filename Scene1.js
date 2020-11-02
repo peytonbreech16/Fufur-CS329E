@@ -34,6 +34,7 @@ var itemCollected1 = false;
 var itemCollected2 = false;
 var itemCollected3 = false;
 var orbCollected = false;
+var sigilOn = false;
 
 class Scene1 extends Phaser.Scene
 {
@@ -167,10 +168,24 @@ class Scene1 extends Phaser.Scene
             repeat: 0
         });
 
-        //puzzle pieces
-        if (!itemCollected1) 
+        // condition for sealing circle to appear
+        if (collectedPieces >= 3 && !sigilOn)
         {
-          puzzlePieces.create(600,400,'salt');
+          this.sigilAnimation();
+          this.time.addEvent({
+            delay: 3800,
+            // spawn furfur
+            callback: () =>{
+              sigil = this.add.sprite(400,300,'sigil').setScale(0.75);
+              sigil.setFrame(37);
+              sigilOn = true;
+            }
+          })
+        }
+
+        if (sigilOn){
+          sigil = this.add.sprite(400,300,'sigil').setScale(0.75);
+          sigil.setFrame(37);
         }
 
         // The player and its settings
@@ -304,14 +319,9 @@ class Scene1 extends Phaser.Scene
           backgroundMusic.play();
         }
 
+        // furfur won't randomly spawn in room 1_1
         if (!furfurSpawned){
-          var randomSpawn = Phaser.Math.Between(0,1); // should furfur spawn?
-          if (randomSpawn <= 0.5){
-            randomSpawn = false;
-          }
-          else {
-            randomSpawn = true;
-          }
+          var randomSpawn = false;
 
           console.log(randomSpawn);
         }
@@ -367,6 +377,7 @@ class Scene1 extends Phaser.Scene
 
         space = this.input.keyboard.addKeys(
             {use:Phaser.Input.Keyboard.KeyCodes.SPACE});
+
     }
 
     update()
@@ -396,11 +407,21 @@ class Scene1 extends Phaser.Scene
           moveProtection();
         }
 
-        // condition for sealing circle to appear
-        if (collectedPieces >= 3)
+        if (sigilOn)
         {
           this.sigilAnimation();
+          this.time.addEvent({
+            delay: 1500,
+            // spawn furfur
+            callback: () =>{
+              backgroundMusic.stop();
+              furfurMusic.stop();
+              musicPlaying = false;
+              this.scene.switch('YouWin');
+            }
+          })
         }
+
     }
 
     //function for when the game needs to start over
@@ -429,13 +450,10 @@ class Scene1 extends Phaser.Scene
         puzzlePieces.destroy();
         pickUpSFX.play();
         collectedPieces++;
-        itemCollected1 = true;
         if (collectedPieces >= 3)
         {
-            this.scene.switch('YouWin');
-            backgroundMusic.stop();
+            //backgroundMusic.stop();
             furfurMusic.stop();
-            collectedPieces = 0;
             furfurSpawned = false;
             musicPlaying = false;
         }
