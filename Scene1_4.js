@@ -125,8 +125,11 @@ class Scene1_4 extends Phaser.Scene
         blood.setFrame(1);
 
         //puzzle pieces
-        puzzlePieces.create(600,200,'salt');
-
+        if (!itemCollected3)
+        {
+          puzzlePieces.create(600,200,'salt');
+        }
+        
         // The player and its settings
         player = this.physics.add.sprite(this.playerSpawnX, this.playerSpawnY, 'dude');
 
@@ -286,6 +289,7 @@ class Scene1_4 extends Phaser.Scene
         puzzlePieces.destroy();
         pickUpSFX.play();
         collectedPieces++;
+        itemCollected3 = true;
         if (collectedPieces >= 3)
         {
             this.scene.switch('YouWin');

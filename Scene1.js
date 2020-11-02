@@ -30,6 +30,10 @@ var orbs;
 var orbText;
 var space;
 var sigil;
+var itemCollected1 = false;
+var itemCollected2 = false;
+var itemCollected3 = false;
+var orbCollected = false;
 
 class Scene1 extends Phaser.Scene
 {
@@ -164,7 +168,10 @@ class Scene1 extends Phaser.Scene
         });
 
         //puzzle pieces
-        puzzlePieces.create(600,400,'salt');
+        if (!itemCollected1) 
+        {
+          puzzlePieces.create(600,400,'salt');
+        }
 
         // The player and its settings
         player = this.physics.add.sprite(this.playerSpawnX, this.playerSpawnY, 'dude');
@@ -335,7 +342,10 @@ class Scene1 extends Phaser.Scene
 
         // orbs that grant furfur immunity
         orbs = this.physics.add.staticGroup();
-        orbs.create(300,150,'orb');
+        if (!orbCollected)
+        {
+          orbs.create(300,150,'orb');
+        }
 
         //Player touching orbs
         this.physics.add.overlap(player, orbs, this.pickUpOrb, null, this);
@@ -418,6 +428,7 @@ class Scene1 extends Phaser.Scene
         puzzlePieces.destroy();
         pickUpSFX.play();
         collectedPieces++;
+        itemCollected1 = true;
         if (collectedPieces >= 3)
         {
             this.scene.switch('YouWin');
@@ -435,6 +446,7 @@ class Scene1 extends Phaser.Scene
       orbs.destroy();
       pickUpSFX.play();
       numOrbs++;
+      orbCollected = true;
       orbText.setText('Orbs: ' + numOrbs);
     }
 

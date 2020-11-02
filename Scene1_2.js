@@ -113,7 +113,11 @@ class Scene1_2 extends Phaser.Scene
         this.add.image(310,280,'grass');
 
         //puzzle pieces
-        puzzlePieces.create(600,200,'salt');
+        if (!itemCollected2)
+        {
+          puzzlePieces.create(600,200,'salt');
+        }
+        
 
         // The player and its settings
         player = this.physics.add.sprite(this.playerSpawnX, this.playerSpawnY, 'dude');
@@ -287,6 +291,7 @@ class Scene1_2 extends Phaser.Scene
         puzzlePieces.destroy();
         pickUpSFX.play();
         collectedPieces++;
+        itemCollected2 = true;
         if (collectedPieces >= 3)
         {
             this.scene.switch('YouWin');
