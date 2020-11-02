@@ -44,7 +44,7 @@ class Scene1_2 extends Phaser.Scene
         this.load.audio('BackgroundMusic',['assets/BackgroundMusic2.mp3']);
         this.load.audio('FurfurMusic',['assets/FurfurMusic.mp3']);
         this.load.audio('pickUp',['assets/PickUp_1.wav']);
-        this.load.image('salt', 'assets/salt.png');
+        this.load.image('iron', 'assets/iron.png');
         this.load.image('bigStump', 'assets/bigStump.png');
         this.load.image('dirt', 'assets/dirtPatch.png');
         this.load.image('grass', 'assets/grassPatch.png');
@@ -115,7 +115,7 @@ class Scene1_2 extends Phaser.Scene
         //puzzle pieces
         if (!itemCollected2)
         {
-          puzzlePieces.create(600,200,'salt');
+          puzzlePieces.create(600,200,'iron');
         }
         
 

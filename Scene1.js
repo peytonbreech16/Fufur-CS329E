@@ -70,7 +70,7 @@ class Scene1 extends Phaser.Scene
         this.load.audio('BackgroundMusic',['assets/BackgroundMusic2.mp3']);
         this.load.audio('FurfurMusic',['assets/FurfurMusic.mp3']);
         this.load.audio('pickUp',['assets/PickUp_1.wav']);
-        this.load.image('salt', 'assets/salt.png');
+        this.load.image('salt', 'assets/saltRock.png');
         this.load.image('medRock', 'assets/medRock.png');
         this.load.image('largeRock', 'assets/largeRock.png');
         this.load.image('bigStump', 'assets/bigStump.png');
@@ -397,9 +397,10 @@ class Scene1 extends Phaser.Scene
         }
 
         // condition for sealing circle to appear
-        // if ([CONDITION]){
-        //   this.sigilAnimation(sigil);
-        // }
+        if (collectedPieces >= 3)
+        {
+          this.sigilAnimation();
+        }
     }
 
     //function for when the game needs to start over
