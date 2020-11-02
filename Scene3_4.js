@@ -36,6 +36,7 @@ class Scene3_4 extends Phaser.Scene
         this.load.spritesheet('dude', 'assets/player.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('furfur', 'assets/demon.png', {frameWidth: 200, frameHeight: 155});
         this.load.spritesheet('protect', 'assets/protection.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('blood', 'assets/blood.png', { frameWidth: 160, frameHeight: 128 });
         this.load.image('orb', 'assets/orb.png');
         this.load.image('ground','assets/ground.png');
         this.load.image('tallTree','assets/tallTree.png');
@@ -44,6 +45,8 @@ class Scene3_4 extends Phaser.Scene
         this.load.audio('FurfurMusic',['assets/FurfurMusic.mp3']);
         this.load.audio('pickUp',['assets/PickUp_1.wav']);
         this.load.image('salt', 'assets/salt.png');
+        this.load.image('dirt', 'assets/dirtPatch.png');
+        this.load.image('grass', 'assets/grassPatch.png');
     }
 
     create ()
@@ -88,6 +91,35 @@ class Scene3_4 extends Phaser.Scene
         stump1.body.setOffset(0, -20);
         stump1.setScale(2);
         stump1.body.setCircle(60);
+
+        var blood = this.add.sprite(735,425,'blood');
+        blood.setFrame(5);
+        blood.flipY = true;
+        blood = this.add.sprite(665,400,'blood');
+        blood.setFrame(5);
+        blood = this.add.sprite(690,260,'blood');
+        blood.setFrame(5);
+        blood = this.add.sprite(650,315,'blood');
+        blood.setFrame(2);
+        blood.flipY = true;
+        this.add.sprite(770,270,'blood').setScale(1.3);
+
+        var dirt = this.add.image(150,180,'dirt').setScale(1.2);
+        dirt.flipX = true;
+        dirt.flipY = true;
+        this.add.image(140,160,'dirt').setScale(1.4);
+        dirt = this.add.image(380,430,'dirt').setScale(1.2);
+        dirt.flipX = true;
+
+        var grass = this.add.image(590,175,'grass');
+        grass.flipX = true;
+        this.add.image(460,260,'grass');
+        grass = this.add.image(530,525,'grass');
+        grass.flipY = true;
+        grass = this.add.image(230,350,'grass');
+        grass.flipX = true;
+        grass.flipY = true;
+        this.add.image(60,300,'grass');
 
         //puzzle pieces
 
