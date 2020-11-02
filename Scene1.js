@@ -29,6 +29,7 @@ var numOrbs = 0;
 var orbs;
 var orbText;
 var space;
+var sigil;
 
 class Scene1 extends Phaser.Scene
 {
@@ -58,6 +59,7 @@ class Scene1 extends Phaser.Scene
         this.load.spritesheet('dude', 'assets/player.png', { frameWidth: 64, frameHeight: 64 });
         this.load.spritesheet('furfur', 'assets/demon.png', {frameWidth: 200, frameHeight: 155});
         this.load.spritesheet('protect', 'assets/protection.png', { frameWidth: 128, frameHeight: 128 });
+        this.load.spritesheet('sigil', 'assets/furfurSigil.png', {frameWidth: 512, frameHeight: 512});
         this.load.image('ground','assets/ground.png');
         this.load.image('tallTree','assets/tallTree.png');
         this.load.image('wideTree','assets/wideTree.png');
@@ -149,6 +151,17 @@ class Scene1 extends Phaser.Scene
         grass.flipX = true;
         grass.flipY = true;
         this.add.image(750,400,'grass');
+
+        sigil = this.add.sprite(400,300,'sigil');
+        sigil.setVisible(false);
+        sigil.setScale(.75)
+
+        this.anims.create({
+            key: 'sigil_on',
+            frames: this.anims.generateFrameNumbers('sigil', { start: 0, end: 37 }),
+            frameRate: 10,
+            repeat: 0
+        });
 
         //puzzle pieces
         puzzlePieces.create(600,400,'salt');
@@ -372,6 +385,11 @@ class Scene1 extends Phaser.Scene
           furfur.body.enable = false;
           moveProtection();
         }
+
+        // condition for sealing circle to appear
+        // if ([CONDITION]){
+        //   this.sigilAnimation(sigil);
+        // }
     }
 
     //function for when the game needs to start over
@@ -443,6 +461,12 @@ class Scene1 extends Phaser.Scene
     {
         prevRoom = "Scene1";
         this.scene.start("Scene1_2", {x: 50, y: playerY});
+    }
+
+    sigilAnimation()
+    {
+      sigil.setVisible(true);
+      sigil.anims.play('sigil_on', false);
     }
 };
 
