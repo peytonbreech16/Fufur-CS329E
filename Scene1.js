@@ -107,19 +107,35 @@ class Scene1 extends Phaser.Scene
         trees.create(10,52,'tallTree');
         trees.create(100,52,'tallTree');
         trees.create(190,52,'tallTree');
-        trees.create(280,52,'tallTree');
-        trees.create(523,52,'tallTree');
+    
+        var tree1 = trees.create(280,52,'tallTree');
+        tree1.body.setCircle(50);
+        tree1.body.setOffset(-10, 40);
+
+        var tree2 = trees.create(523,52,'tallTree');
+        tree2.body.setCircle(50);
+        tree2.body.setOffset(0, 40);
+
         trees.create(600,52,'tallTree');
         trees.create(689,52,'tallTree');
         trees.create(780,52,'tallTree');
-        trees.create(770,145,'tallTree');
         trees.create(30,145,'tallTree');
         trees.create(25,250,'tallTree');
         trees.create(35,365,'tallTree');
         trees.create(25,480,'tallTree');
         trees.create(75,525,'tallTree');
-        trees.create(775,480,'tallTree');
-        trees.create(725,525,'tallTree');
+
+        var tree3 = trees.create(775,480,'tallTree');
+        tree3.body.setCircle(50);
+        tree3.body.setOffset(0, 20);
+
+        var tree4 = trees.create(725,525,'tallTree');
+        tree4.body.setCircle(50);
+        tree4.body.setOffset(0, 20);
+
+        var tree5 = trees.create(770,145,'tallTree');
+        tree5.body.setCircle(50);
+        tree5.body.setOffset(0, 40);
 
         // add rocks
         var rocks = this.physics.add.staticGroup();

@@ -66,26 +66,41 @@ class Scene2_2 extends Phaser.Scene
         trees.create(10,52,'tallTree');
         trees.create(100,52,'tallTree');
         trees.create(190,52,'tallTree');
-        trees.create(280,52,'tallTree');
-        trees.create(600,52,'tallTree');
         trees.create(689,52,'tallTree');
         trees.create(780,52,'tallTree');
-        trees.create(25,480,'tallTree');
         trees.create(75,525,'tallTree');
-        var tree = trees.create(540,450,'tallTree');
-        tree.body.setCircle(55);
-        tree.body.setOffset(0,-3);
+
+        var tree1 = trees.create(280,52,'tallTree');
+        tree1.body.setCircle(50);
+        tree1.body.setOffset(-20, 40);
+
+        var tree2 = trees.create(600,52,'tallTree');
+        tree2.body.setCircle(50);
+        tree2.body.setOffset(15, 40);
+
+        var tree3 = trees.create(540,450,'tallTree');
+        tree3.body.setCircle(55);
+        tree3.body.setOffset(0,-3);
+
+        var tree4 = trees.create(150,525,'tallTree');
+        tree4.body.setCircle(50);
+        tree4.body.setOffset(-10, -5);
+
+        var tree5 = trees.create(25,480,'tallTree');
+        tree5.body.setCircle(50);
+        tree5.body.setOffset(-10, -5);
+
         trees.create(610,450,'tallTree');
         trees.create(690,450,'tallTree');
         trees.create(775,450,'tallTree');
-        trees.create(150,525,'tallTree');
         trees.create(725,525,'tallTree');
         trees.create(520,525,'tallTree');
         trees.create(580,525,'tallTree');
         trees.create(650,525,'tallTree');
         trees.create(523,52,'tallTree');
-        tree = trees.create(400,270,'wideTree');
-        tree.body.setCircle(60);
+
+        var bigtree = trees.create(400,270,'wideTree');
+        bigtree.body.setCircle(60);
 
         var blood = this.add.sprite(280,300,'blood').setScale(1.2);
         blood.flipX = true;

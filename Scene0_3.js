@@ -85,9 +85,9 @@ class Scene0_3 extends Phaser.Scene
             trees.create(i,525,'tallTree');
         };
 
-        for (var i=580; i < 1000; i+=90)
+        for (var i=410; i < 1000; i+=90)
         {
-            trees.create(i-170,25,'tallTree');
+            trees.create(i+90,25,'tallTree');
         };
 
         trees.create(770,130,'tallTree');
@@ -120,6 +120,10 @@ class Scene0_3 extends Phaser.Scene
         var tree7 = trees.create(420,240,'tallTree');
         tree7.body.setCircle(50);
         tree7.body.setOffset(0, 15);
+
+        var tree8 = trees.create(410,25,'tallTree');
+        tree8.body.setCircle(50);
+        tree8.body.setOffset(0, 40);
 
         var blood = this.add.sprite(660,150,'blood').setScale(1.5);
         blood.flipX = true;

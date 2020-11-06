@@ -70,9 +70,13 @@ class Scene1_4 extends Phaser.Scene
         tree1.body.setCircle(50);
         tree1.body.setOffset(10, -5);
 
-        var tree1 = trees.create(400,440,'tallTree');
-        tree1.body.setCircle(50);
-        tree1.body.setOffset(0, -5);
+        var tree2 = trees.create(400,440,'tallTree');
+        tree2.body.setCircle(50);
+        tree2.body.setOffset(0, -5);
+
+        var tree3 = trees.create(180,350,'tallTree');
+        tree3.body.setCircle(50);
+        tree3.body.setOffset(-5, 0);
 
         for (var i=0; i < 900; i+=90)
         {
@@ -82,7 +86,7 @@ class Scene1_4 extends Phaser.Scene
 
         for (var i=10; i < 270; i+=90)
         {
-            trees.create(i,350,'tallTree');
+            trees.create(i-90,350,'tallTree');
             trees.create(i,440,'tallTree');
             trees.create(i,530,'tallTree');
         };

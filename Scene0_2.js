@@ -65,12 +65,21 @@ class Scene0_2 extends Phaser.Scene
         puzzlePieces = this.physics.add.staticGroup();
 
         trees.create(0,25,'tallTree');
-        trees.create(25,120,'tallTree');
-        trees.create(75,75,'tallTree');
+
+        var tree1 = trees.create(25,100,'tallTree');
+        tree1.body.setCircle(50);
+        tree1.body.setOffset(0, 10);
+
+        var tree2 = trees.create(75,75,'tallTree');
+        tree2.body.setCircle(50);
+        tree2.body.setOffset(0, -5);
 
         trees.create(790,0,'tallTree');
-        trees.create(775,100,'tallTree');
         trees.create(725,50,'tallTree');
+
+        var tree3 = trees.create(775,120,'tallTree');
+        tree3.body.setCircle(50);
+        tree3.body.setOffset(0, 20);
 
         trees.create(25,480,'tallTree');
         trees.create(75,525,'tallTree');
@@ -86,10 +95,13 @@ class Scene0_2 extends Phaser.Scene
             trees.create(i,525,'tallTree');
         };
 
-        for (var i=250; i < 600; i+=90)
-        {
-            trees.create(i,350,'tallTree');
-        };
+        var tree4 = trees.create(250,350,'tallTree');
+        tree4.body.setCircle(75);
+        tree4.body.setOffset(0, 0);
+
+        var tree5 = trees.create(520,350,'tallTree');
+        tree5.body.setCircle(75);
+        tree5.body.setOffset(-60, -5);
 
         var stump2 = trees.create(400,340,'wideTree');
         stump2.setScale(1.4);
