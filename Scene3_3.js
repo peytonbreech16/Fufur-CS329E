@@ -78,11 +78,11 @@ class Scene3_3 extends Phaser.Scene
 
         var tree1 = trees.create(780,120,'tallTree');
         tree1.body.setCircle(50);
-        tree1.body.setOffset(10, 0);
+        tree1.body.setOffset(10, 10);
 
         var tree2 = trees.create(550,450,'tallTree');
         tree2.body.setCircle(50);
-        tree2.body.setOffset(10, -5);
+        tree2.body.setOffset(-5, -5);
 
         for (var i=550; i < 900; i+=90)
         {

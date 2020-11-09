@@ -75,9 +75,17 @@ class Scene3_2 extends Phaser.Scene
             trees.create(750,i,'tallTree');
         };
 
+        var tree = trees.create(275,295,'tallTree');
+        tree.body.setCircle(55);
+        tree.body.setOffset(-20,-5);
+
+        for (var i=-85; i < 270; i+=90)
+        {
+            trees.create(i,295,'tallTree');
+        };
+
         for (var i=0; i <= 270; i+=90)
         {
-            trees.create(i+5,295,'tallTree');
             trees.create(i+5,350,'tallTree');
             trees.create(i+5,400,'tallTree');
             trees.create(i+5,450,'tallTree');
@@ -91,14 +99,17 @@ class Scene3_2 extends Phaser.Scene
         trees.create(100,540,'tallTree');
         trees.create(190,540,'tallTree');
         trees.create(280,540,'tallTree');
-        trees.create(523,560,'tallTree');
         trees.create(600,560,'tallTree');
         trees.create(689,560,'tallTree');
         trees.create(780,560,'tallTree');
 
+        var tree = trees.create(523,560,'tallTree');
+        tree.body.setCircle(55);
+        tree.body.setOffset(10,-5);
+
         var stump1 = trees.create(480,250,'bigStump');
-        stump1.body.setCircle(30);
-        stump1.body.setOffset(25, -5);
+        stump1.body.setCircle(50);
+        stump1.body.setOffset(20, -30);
 
         var log1 = trees.create(480,175,'log');
 

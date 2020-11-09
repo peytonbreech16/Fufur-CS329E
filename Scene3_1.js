@@ -92,11 +92,17 @@ class Scene3_1 extends Phaser.Scene
         trees.create(10,560,'tallTree');
         trees.create(100,560,'tallTree');
         trees.create(190,560,'tallTree');
-        trees.create(280,560,'tallTree');
-        trees.create(523,560,'tallTree');
         trees.create(600,560,'tallTree');
         trees.create(689,560,'tallTree');
         trees.create(780,560,'tallTree');
+
+        var tree3 = trees.create(280,560,'tallTree');
+        tree3.body.setCircle(55);
+        tree3.body.setOffset(-30,-5);
+
+        var tree4 = trees.create(523,560,'tallTree');
+        tree4.body.setCircle(55);
+        tree4.body.setOffset(10,-5);
 
         var dirt = this.add.image(620,445,'dirt');
         dirt.flipX = true;

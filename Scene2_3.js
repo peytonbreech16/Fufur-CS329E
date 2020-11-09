@@ -63,36 +63,71 @@ class Scene2_3 extends Phaser.Scene
         trees = this.physics.add.staticGroup();
         puzzlePieces = this.physics.add.staticGroup();
 
-        trees.create(25,480,'tallTree');
+        var tree = trees.create(25,450,'tallTree');
+        tree.body.setCircle(50);
+        tree.body.setOffset(-20, -5);
+
         trees.create(90,525,'tallTree');
-        trees.create(180,525,'tallTree');
+        //trees.create(180,525,'tallTree');
 
-        for (var i=0; i < 270; i+=90)
+        for (var i=0; i < 180; i+=90)
         {
             trees.create(i,52,'tallTree');
         };
 
-        for (var i=550; i < 900; i+=90)
+        for (var i=640; i < 900; i+=90)
         {
             trees.create(i,52,'tallTree');
         };
 
-        trees.create(780,120,'tallTree');
-        trees.create(750,450,'tallTree');
+        var tree = trees.create(750,450,'tallTree');
+        tree.body.setCircle(55);
+        tree.body.setOffset(0,-5);
 
-        for (var i=500; i < 900; i+=90)
+        for (var i=590; i < 900; i+=90)
         {
             trees.create(i,530,'tallTree');
         };
 
         trees.create(90,525,'tallTree');
-        trees.create(180,525,'tallTree');
 
-        for (var i=200; i < 650; i+=90)
+        for (var i=290; i < 560; i+=90)
         {
             trees.create(i,260,'tallTree');
             trees.create(i,310,'tallTree');
         };
+
+        var tree1 = trees.create(200,260,'tallTree');
+        tree1.body.setCircle(50);
+        tree1.body.setOffset(0, -5);
+
+        var tree2 = trees.create(200,310,'tallTree');
+        tree2.body.setCircle(50);
+        tree2.body.setOffset(0, 40);
+
+        var tree3 = trees.create(560,260,'tallTree');
+        tree3.body.setCircle(55);
+        tree3.body.setOffset(-20,-5);
+
+        var tree4 = trees.create(560,310,'tallTree');
+        tree4.body.setCircle(50);
+        tree4.body.setOffset(-20, 40);
+
+        var tree5 = trees.create(180,52,'tallTree');
+        tree5.body.setCircle(50);
+        tree5.body.setOffset(-20, 40);
+
+        var tree6 = trees.create(550,52,'tallTree');
+        tree6.body.setCircle(50);
+        tree6.body.setOffset(0, 40);
+
+        var tree7 = trees.create(180,525,'tallTree');
+        tree7.body.setCircle(55);
+        tree7.body.setOffset(-30,-5);
+
+        var tree8 = trees.create(500,530,'tallTree');
+        tree8.body.setCircle(55);
+        tree8.body.setOffset(10,-5);
 
         var dirt = this.add.image(290,510,'dirt').setScale(1.5);
         dirt.flipX = true;
@@ -151,7 +186,7 @@ class Scene2_3 extends Phaser.Scene
         this.physics.add.existing(leftBorder);
         this.physics.add.overlap(player, leftBorder, this.moveRoomLeft, null, this);
 
-        rightBorder = this.add.rectangle(800, 300, 25, 200, 0xFF0000);
+        rightBorder = this.add.rectangle(800, 250, 25, 300, 0xFF0000);
         this.physics.add.existing(rightBorder);
         this.physics.add.overlap(player, rightBorder, this.moveRoomRight, null, this);
 

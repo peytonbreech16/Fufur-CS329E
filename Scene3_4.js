@@ -74,15 +74,27 @@ class Scene3_4 extends Phaser.Scene
 
         var tree1 = trees.create(20,120,'tallTree');
         tree1.body.setCircle(50);
-        tree1.body.setOffset(10, -5);
+        tree1.body.setOffset(0, 10);
+
+        var tree2 = trees.create(270,450,'tallTree');
+        tree2.body.setCircle(55);
+        tree2.body.setOffset(-20,-5);
+
+        var tree3 = trees.create(600,525,'tallTree');
+        tree3.body.setCircle(50);
+        tree3.body.setOffset(0, -5);
+
+        for (var i=0; i < 270; i+=90)
+        {
+            trees.create(i,450,'tallTree');
+        };
 
         for (var i=0; i < 360; i+=90)
         {
-            trees.create(i,450,'tallTree');
             trees.create(i,530,'tallTree');
         };
 
-        for (var i=600; i < 1000; i+=90)
+        for (var i=690; i < 1000; i+=90)
         {
             trees.create(i,525,'tallTree');
         };
@@ -256,7 +268,7 @@ class Scene3_4 extends Phaser.Scene
 
         movePlayer();
 
-        moveFurfur();
+        //moveFurfur();
 
         if (space.use.isDown && numOrbs != 0)
         {
