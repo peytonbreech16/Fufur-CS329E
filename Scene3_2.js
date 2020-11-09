@@ -301,12 +301,17 @@ class Scene3_2 extends Phaser.Scene
     //function for when the game needs to start over
     startOver(player, furfur)
     {
-        this.scene.switch('Replay');
-        backgroundMusic.stop();
-        furfurMusic.stop();
-        collectedPieces = 0;
-        furfurSpawned = false;
-        musicPlaying = false;
+        if (isProtected){
+          return;
+        }
+        else{
+          this.scene.switch('Replay');
+          backgroundMusic.stop();
+          furfurMusic.stop();
+          collectedPieces = 0;
+          furfurSpawned = false;
+          musicPlaying = false;
+        }
     }
 
     pickUpPiece(player, puzzlePieces)
