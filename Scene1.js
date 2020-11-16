@@ -71,6 +71,7 @@ class Scene1 extends Phaser.Scene
         this.load.spritesheet('protect', 'assets/protection.png', { frameWidth: 128, frameHeight: 128 });
         this.load.spritesheet('sigil', 'assets/furfurSigil.png', {frameWidth: 512, frameHeight: 512});
         this.load.spritesheet('candleOn', 'assets/candle.png', {frameWidth: 24, frameHeight: 24});
+        this.load.spritesheet('guide', 'assets/guide.png', { frameWidth: 128, frameHeight: 128 });
         this.load.image('ground','assets/ground.png');
         this.load.image('tallTree','assets/tallTree.png');
         this.load.image('wideTree','assets/wideTree.png');
@@ -269,6 +270,17 @@ class Scene1 extends Phaser.Scene
             repeat: -1
         });
 
+        // spirit guide animations
+        var instrGuide = this.physics.add.sprite(150, 150, 'guide').setScale(1.7);
+
+        this.anims.create({
+          key: 'idle',
+          frames: this.anims.generateFrameNumbers('guide', { start: 0, end: 3 }),
+          frameRate: 8,
+          repeat: -1
+        });
+
+    instrGuide.anims.play('idle', true);
         //  Input Events
         cursors = this.input.keyboard.createCursorKeys();
         wasd = this.input.keyboard.addKeys(
