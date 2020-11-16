@@ -36,6 +36,7 @@ var itemCollected2 = false;
 var itemCollected3 = false;
 var orbCollected = false;
 var sigilOn = false;
+var candlesOn;
 
 class Scene1 extends Phaser.Scene
 {
@@ -66,6 +67,7 @@ class Scene1 extends Phaser.Scene
         this.load.spritesheet('furfur', 'assets/demon.png', {frameWidth: 200, frameHeight: 155});
         this.load.spritesheet('protect', 'assets/protection.png', { frameWidth: 128, frameHeight: 128 });
         this.load.spritesheet('sigil', 'assets/furfurSigil.png', {frameWidth: 512, frameHeight: 512});
+        this.load.spritesheet('candleOn', 'assets/candle.png', {frameWidth: 24, frameHeight: 24});
         this.load.image('ground','assets/ground.png');
         this.load.image('tallTree','assets/tallTree.png');
         this.load.image('wideTree','assets/wideTree.png');
@@ -139,13 +141,12 @@ class Scene1 extends Phaser.Scene
         tree5.body.setCircle(50);
         tree5.body.setOffset(0, 40);
 
-        // add rocks
-        var rocks = this.physics.add.staticGroup();
-        rocks.create(300,200,'medRock');
-        rocks.create(300,400,'medRock');
-        rocks.create(500,200,'medRock');
-        rocks.create(500,400,'medRock');
-        rocks.scaleXY(1);
+        this.anims.create({
+            key: 'candles_on',
+            frames: this.anims.generateFrameNumbers('candleOn', { start: 0, end: 2 }),
+            frameRate: 10,
+            repeat: -1
+        });
 
         this.add.image(100,160,'vPath').setScale(1.3);
         this.add.image(140,160,'vPath').setScale(1.3);
@@ -194,7 +195,7 @@ class Scene1 extends Phaser.Scene
             delay: 3800,
             // spawn furfur
             callback: () =>{
-              sigil = this.add.sprite(400,300,'sigil').setScale(0.75);
+              sigil.setVisible(true);
               sigil.setFrame(37);
               sigilOn = true;
             }
@@ -433,10 +434,14 @@ class Scene1 extends Phaser.Scene
 
         if (sigilOn)
         {
-          this.sigilAnimation();
+          var candle1 = this.add.sprite(300,200,'candleOn');
+          var candle2 = this.add.sprite(300,400,'candleOn');
+          var candle3 = this.add.sprite(500,200,'candleOn');
+          var candle4 = this.add.sprite(500,400,'candleOn');
+          this.anims.staggerPlay('candles_on',[candle1,candle2,candle3,candle4],500,false);
+          
           this.time.addEvent({
             delay: 1500,
-            // spawn furfur
             callback: () =>{
               backgroundMusic.stop();
               furfurMusic.stop();
@@ -525,7 +530,14 @@ class Scene1 extends Phaser.Scene
 
     sigilAnimation()
     {
-      sigil.setVisible(true);
+      var candle1 = this.add.sprite(300,200,'candleOn');
+      var candle2 = this.add.sprite(300,400,'candleOn');
+      var candle3 = this.add.sprite(500,200,'candleOn');
+      var candle4 = this.add.sprite(500,400,'candleOn');
+      this.anims.staggerPlay('candles_on',[candle1,candle2,candle3,candle4],500,false);
+
+      sigil = this.add.sprite(400,300,'sigil');
+      sigil.setScale(.75)
       sigil.anims.play('sigil_on', false);
     }
 };
