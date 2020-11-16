@@ -1,5 +1,6 @@
 var player;
 var furfur;
+var hitbox;
 var cursors;
 var wasd;
 var gameOver = false;
@@ -81,6 +82,7 @@ class Scene1 extends Phaser.Scene
         this.load.image('vPath', 'assets/vertStonePath.png');
         this.load.image('dirt', 'assets/dirtPatch.png');
         this.load.image('grass', 'assets/grassPatch.png');
+        this.load.image('hitbox', 'assets/hitbox.png');
     }
 
     create()
@@ -107,7 +109,7 @@ class Scene1 extends Phaser.Scene
         trees.create(10,52,'tallTree');
         trees.create(100,52,'tallTree');
         trees.create(190,52,'tallTree');
-    
+
         var tree1 = trees.create(280,52,'tallTree');
         tree1.body.setCircle(50);
         tree1.body.setOffset(-10, 40);
@@ -211,6 +213,11 @@ class Scene1 extends Phaser.Scene
         furfur = this.physics.add.sprite(100, 530, 'furfur');
         furfur.setVisible(false);
         furfur.disableBody(true,true);
+
+        // The enemy hit box
+        hitbox = this.physics.add.sprite(furfur.x, furfur.y, 'hitbox');
+        hitbox.setVisible(false);
+        hitbox.disableBody(true,true);
 
         //  Player and furfur physics properties. Give the little guy a slight bounce.
         player.setBounce(0.2);
@@ -319,10 +326,10 @@ class Scene1 extends Phaser.Scene
               var x = this.playerSpawnX;
               var y = this.playerSpawnY;
               furfur = this.physics.add.sprite(x, y, 'furfur');
-              furfur.setActive(true).setVisible(true);
-              furfur.body.enable = true;
+              hitbox.setActive(true).setVisible(false);
+              hitbox.body.enable = true;
               furfurSpawned = true;
-              this.physics.add.overlap(player, furfur, this.startOver, null, this);
+              this.physics.add.overlap(player, hitbox, this.startOver, null, this);
               furfur.setCollideWorldBounds(true);
             },
           });
@@ -351,14 +358,15 @@ class Scene1 extends Phaser.Scene
             // spawn furfur
             callback: () =>{
               furfur = this.physics.add.sprite(0, 0, 'furfur');
-              furfur.setActive(true).setVisible(true);
-              furfur.body.enable = true;
+              hitbox = this.physics.add.sprite(0, 0, 'hitbox');
+              hitbox.setActive(true).setVisible(false);
+              hitbox.body.enable = true;
 
               //music playing for furfur spawn
               backgroundMusic.stop();
               furfurMusic.play();
 
-              this.physics.add.overlap(player, furfur, this.startOver, null, this);
+              this.physics.add.overlap(player, hitbox, this.startOver, null, this);
               setFurfurCoord();
               furfur.setCollideWorldBounds(true);
               furfurSpawned = true;
@@ -596,7 +604,7 @@ function moveFurfur()
             furfur.flipX = true;
         }
 
-        else if (furfur.y > player.y+2)
+        else if (furfur.y >= player.y+2)
         {
             furfur.y -= 2;
             furfur.anims.play('furfur_up', true);
@@ -607,7 +615,7 @@ function moveFurfur()
             furfur.anims.play('furfur_down', true);
         }
 
-        else if (furfur.x > player.x+2)
+        else if (furfur.x >= player.x+2)
         {
             furfur.x -= 2;
             furfur.anims.play('furfur_left', true);
@@ -620,6 +628,9 @@ function moveFurfur()
             furfur.anims.play('furfur_right', true);
             furfur.flipX = false;
         }
+
+        hitbox.x = furfur.x;
+        hitbox.y = furfur.y + 25;
     };
 
 function setFurfurCoord()
