@@ -4,9 +4,21 @@
 <head>
     <script src="phaser.min.js"></script>
     <link rel="stylesheet" href="main.css"/>
+    <style media='screen' type='text/css'>
+      @font-face{
+        font-family: "Curse";
+        src: url("assets/GypsyCurse.ttf");
+      }
+      @font-face{
+        font-family: "Headache";
+        src: url("assets/headache.ttf");
+      }
+    </style>
 </head>
 
 <body>
+    <div style="font-family: Curse; position: absolute; left:-1000px; visibility:hidden;">Curse</div>
+    <div style="font-family: Headache; position: absolute; left:-1000px; visibility:hidden;">Headache</div>
     <script src="StartScreen.js"></script>
     <script src="Scene1.js"></script>
     <script src="Scene1_2.js"></script>

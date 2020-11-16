@@ -12,8 +12,6 @@ class YouWin extends Phaser.Scene{
     this.load.image('back4', 'assets/background4.png');
     this.load.image('back5', 'assets/background5.png');
     this.load.image('back6', 'assets/background6.png');
-    this.load.image('youWon', 'assets/text/youWon.png');
-    this.load.image('playAgain', 'assets/text/playAgain.png');
   }
 
   create(){
@@ -42,9 +40,9 @@ class YouWin extends Phaser.Scene{
     back6.displayWidth = game.config.width * 1;
     back6.scaleY = back6.scaleX;
 
-    this.add.image(400,90,'youWon').setScale(.9);
+    this.add.text(50,40,'You sealed Furfur away and escaped',{fontFamily:'Curse',fontSize:75,fill:"#856f6f"});
 
-    playAgain1 = this.add.image(400,200,'playAgain').setScale(.75);
+    playAgain1 = this.add.text(320,160,'Play Again',{fontFamily:'Curse',fontSize:64,fill:"#856f6f"});
     playAgain1.setInteractive({useHandCursor: true});
     playAgain1.on('pointerdown', function() {
       location.reload();

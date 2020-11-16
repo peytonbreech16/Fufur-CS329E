@@ -12,8 +12,6 @@ class Replay extends Phaser.Scene{
     this.load.image('back4', 'assets/background4.png');
     this.load.image('back5', 'assets/background5.png');
     this.load.image('back6', 'assets/background6.png');
-    this.load.image('gameover', 'assets/text/gameover.png');
-    this.load.image('playAgain', 'assets/text/playAgain.png');
   }
 
   create(){
@@ -42,9 +40,9 @@ class Replay extends Phaser.Scene{
     back6.displayWidth = game.config.width * 1;
     back6.scaleY = back6.scaleX;
 
-    this.add.image(400,90,'gameover');
+    this.add.text(220,5,'Game Over',{fontFamily:'Curse',fontSize:128,fill:"#856f6f"});
 
-    playAgain2 = this.add.image(400,200,'playAgain').setScale(.75);
+    playAgain2 = this.add.text(320,160,'Play Again',{fontFamily:'Curse',fontSize:64,fill:"#856f6f"});
     playAgain2.setInteractive({useHandCursor: true});
     playAgain2.on('pointerdown', function() {
       location.reload();

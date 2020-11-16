@@ -13,9 +13,6 @@ class StartScreen extends Phaser.Scene{
     this.load.image('back4', 'assets/background4.png');
     this.load.image('back5', 'assets/background5.png');
     this.load.image('back6', 'assets/background6.png');
-    this.load.image('titleText', 'assets/text/title.png');
-    this.load.image('start', 'assets/text/start.png');
-    this.load.image('howToPlay', 'assets/text/howToPlay.png');
   }
 
   create(){
@@ -44,15 +41,15 @@ class StartScreen extends Phaser.Scene{
     back6.displayWidth = game.config.width * 1;
     back6.scaleY = back6.scaleX;
 
-    this.add.image(400,90,'titleText').setScale(1.2);
+    this.add.text(300,5,'Furfur',{fontFamily:'Curse',fontSize:120,fill:"#856f6f"});
 
-    playButton1 = this.add.image(400,200,'start').setScale(1.2);
+    playButton1 = this.add.text(360,150,'Start',{fontFamily:'Curse',fontSize:64,fill:"#856f6f"});
     playButton1.setInteractive({useHandCursor: true});
     playButton1.on('pointerdown', function() {
       this.scene.start('Scene1');
     }, this);
 
-    howToButton = this.add.image(400,275,'howToPlay').setScale(1.2);
+    howToButton = this.add.text(315,225,'How to Play',{fontFamily:'Curse',fontSize:64,fill:"#856f6f"});
     howToButton.setInteractive({useHandCursor: true});
     howToButton.on('pointerdown', function() {
       this.scene.switch('Instructions');

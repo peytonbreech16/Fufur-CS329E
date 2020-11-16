@@ -169,7 +169,7 @@ class Scene2_3 extends Phaser.Scene
         this.physics.add.overlap(player, puzzlePieces, this.pickUpPiece, null, this);
 
         //Text for showing how many puzzle pieces collected
-        scoreText = this.add.text(16, 16, 'Pieces Collected: ' + collectedPieces + '/3', { fontSize: '32px', fill: '#ff0' });
+        scoreText = this.add.text(20, 20, 'Pieces Collected: ' + collectedPieces + '/3', {fontFamily: 'Headache', fontSize: 22, fill: '#ff0' });
 
         //  Input Events
         cursors = this.input.keyboard.createCursorKeys();
@@ -267,7 +267,7 @@ class Scene2_3 extends Phaser.Scene
           this.physics.add.overlap(player, orbs, this.pickUpOrb, null, this);
 
           //Text for showing how many orbs player can use
-          orbText = this.add.text(16, 40, 'Orbs: ' + numOrbs, { fontSize: '32px', fill: '#ff0' });
+          orbText = this.add.text(20, 40, 'Orbs: ' + numOrbs, {fontFamily: 'Headache', fontSize: 22, fill: '#ff0' });
 
           // protection
           protection = this.physics.add.sprite(playerX, playerY, 'protect');

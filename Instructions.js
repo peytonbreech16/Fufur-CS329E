@@ -9,19 +9,6 @@ class Instructions extends Phaser.Scene{
 
   preload(){
     this.load.image('back1', 'assets/background1.png');
-    this.load.image('start', 'assets/text/start.png');
-    this.load.image('back', 'assets/text/back.png');
-    this.load.image('inst1', 'assets/text/instructions1.png');
-    this.load.image('inst2', 'assets/text/instructions2.png');
-    this.load.image('inst3', 'assets/text/instructions3.png');
-    this.load.image('moveInstr', 'assets/text/movementInstr.png');
-    this.load.image('guideInstr1', 'assets/text/guideInstr1.png');
-    this.load.image('guideInstr2', 'assets/text/guideInstr2.png');
-    this.load.image('piecesInstr1', 'assets/text/piecesInstr1.png');
-    this.load.image('piecesInstr2', 'assets/text/piecesInstr2.png');
-    this.load.image('orbInstr1', 'assets/text/orbInstr1.png');
-    this.load.image('orbInstr2', 'assets/text/orbInstr2.png');
-    this.load.image('orbInstr3', 'assets/text/orbInstr3.png');
     this.load.image('saltRock', 'assets/saltRock.png');
     this.load.image('candleOff', 'assets/candleOff.png');
     this.load.image('iron', 'assets/iron.png');
@@ -38,37 +25,37 @@ class Instructions extends Phaser.Scene{
     back1.displayWidth = game.config.width * 1;
     back1.scaleY = back1.scaleX;
 
-    playButton2 = this.add.image(340,550,'start').setScale(.8);
+    playButton2 = this.add.text(320,515,'Start',{fontFamily:'Curse',fontSize:45,fill:"#856f6f"});
     playButton2.setInteractive({useHandCursor: true});
     playButton2.on('pointerdown', function() {
       this.scene.switch('Scene1');
     }, this);
 
-    backButton = this.add.image(460,550,'back').setScale(.8);
+    backButton = this.add.text(425,515,'Back',{fontFamily:'Curse',fontSize:45,fill:"#856f6f"});
     backButton.setInteractive({useHandCursor: true});
     backButton.on('pointerdown', function() {
       this.scene.switch('StartScreen');
     }, this);
 
     // text
-    this.add.image(400,30,'inst1').setScale(.8);
-    this.add.image(400,55,'inst2').setScale(.8);
-    this.add.image(400,80,'inst3').setScale(.8);
+    this.add.text(130,15,"You're trapped in Furfur's demonic forest.",{fontFamily:'Headache',fontSize:22,fill:"#856f6f"});
+    this.add.text(20,42,"Collect all the sealing pieces to send Furfur back to Hell.",{fontFamily:'Headache',fontSize:22,fill:"#856f6f"});
+    this.add.text(122,69,"If Furfur catches you, your fate is sealed.",{fontFamily:'Headache',fontSize:22,fill:"#856f6f"});
 
-    this.add.image(370, 170, 'moveInstr');
+    this.add.text(120,160,'Use WASD or arrow keys to explore the forest.',{fontFamily:'Headache',fontSize:18,fill:"#856f6f"});
 
-    this.add.image(330, 240, 'guideInstr1').setScale(.65);
-    this.add.image(330, 265, 'guideInstr2').setScale(.65);
+    this.add.text(70,230,'Your spirit guide will help you on your journey.',{fontFamily:'Headache',fontSize:18,fill:"#856f6f"});
+    this.add.text(69,255,"Press 'ENTER' to interact with your spirit guide.",{fontFamily:'Headache',fontSize:18,fill:"#856f6f"});
 
-    this.add.image(330, 330, 'piecesInstr1').setScale(.65);
-    this.add.image(330, 355, 'piecesInstr2').setScale(.65);
+    this.add.text(110,320,"Collect all the salt, iron, and candle pieces,",{fontFamily:'Headache',fontSize:18,fill:"#856f6f"});
+    this.add.text(125,345,"and return them to your spirit guide.",{fontFamily:'Headache',fontSize:18,fill:"#856f6f"});
 
-    this.add.image(310, 420, 'orbInstr1').setScale(.65);
-    this.add.image(310, 445, 'orbInstr2').setScale(.65);
-    this.add.image(310, 470, 'orbInstr3').setScale(.65);
+    this.add.text(20,410,"Spirit orbs grant you temporary immunity from Furfur.",{fontFamily:'Headache',fontSize:18,fill:"#856f6f"});
+    this.add.text(65,435,"They are a limited resource, so use them wisely.",{fontFamily:'Headache',fontSize:18,fill:"#856f6f"});
+    this.add.text(145,460,"Press 'SPACE' to use a spirit orb.",{fontFamily:'Headache',fontSize:18,fill:"#856f6f"});
 
     // static player for instructions
-    instrPlayer = this.physics.add.sprite(640, 160, 'player');
+    instrPlayer = this.physics.add.sprite(670, 160, 'player');
 
     this.anims.create({
         key: 'left',
@@ -113,7 +100,7 @@ class Instructions extends Phaser.Scene{
         right:Phaser.Input.Keyboard.KeyCodes.D});
 
     // spirit guide animations
-    var instrGuide = this.physics.add.sprite(640, 230, 'guide').setScale(1.7);
+    var instrGuide = this.physics.add.sprite(670, 230, 'guide').setScale(1.7);
 
     this.anims.create({
         key: 'idle',
@@ -125,17 +112,17 @@ class Instructions extends Phaser.Scene{
     instrGuide.anims.play('idle', true);
 
     // sealing pieces
-    this.add.image(580, 345, 'saltRock').setScale(1.6);
-    this.add.image(620, 345, 'iron').setScale(1.6);
-    this.add.image(660, 345, 'candleOff').setScale(1.6);
+    this.add.image(600, 345, 'saltRock').setScale(1.6);
+    this.add.image(640, 345, 'iron').setScale(1.6);
+    this.add.image(680, 345, 'candleOff').setScale(1.6);
 
     // orb
-    this.add.image(600, 445, 'orb').setScale(1.5);
+    this.add.image(630, 445, 'orb').setScale(1.5);
 
     // protection animation
-    var instrPlayer2 = this.add.sprite(700,440, 'player');
+    var instrPlayer2 = this.add.sprite(720,440, 'player');
     instrPlayer2.anims.play('turn', true);
-    var instrProtection = this.physics.add.sprite(700, 440, 'protect');
+    var instrProtection = this.physics.add.sprite(720, 440, 'protect');
 
     this.anims.create({
       key:'on',
