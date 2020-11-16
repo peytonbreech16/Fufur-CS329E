@@ -44,6 +44,7 @@ class Scene1_4 extends Phaser.Scene
         this.load.audio('BackgroundMusic',['assets/BackgroundMusic2.mp3']);
         this.load.audio('FurfurMusic',['assets/FurfurMusic.mp3']);
         this.load.audio('pickUp',['assets/PickUp_1.wav']);
+        this.load.audio('candleSFX',['assets/candleSFX.wav']);
         this.load.image('candle', 'assets/candleOff.png');
         this.load.image('bigStump', 'assets/bigStump.png');
         this.load.image('vPath', 'assets/vertStonePath.png');
@@ -62,6 +63,8 @@ class Scene1_4 extends Phaser.Scene
         //sound effects
         pickUpSFX = this.sound.add('pickUp');
         pickUpSFX.setVolume(.50);
+        candleSFX = this.sound.add('candleSFX');
+        candleSFX.setVolume(2);
 
         // add trees
         trees = this.physics.add.staticGroup();
@@ -303,7 +306,7 @@ class Scene1_4 extends Phaser.Scene
     pickUpPiece(player, puzzlePieces)
     {
         puzzlePieces.destroy();
-        pickUpSFX.play();
+        candleSFX.play();
         collectedPieces++;
         itemCollected3 = true;
         if (collectedPieces >= 3)

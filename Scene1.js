@@ -21,6 +21,9 @@ var prevRoom; // room the player was previously in
 var musicPlaying = false;
 var furfurMusic;
 var pickUpSFX;
+var candleSFX;
+var ironSFX;
+var saltSFX;
 var protection; // protection animation
 var isProtected = false; // can player can phase through furfur
 var protTimerOn = false; // is the timer running

@@ -44,6 +44,7 @@ class Scene1_2 extends Phaser.Scene
         this.load.audio('BackgroundMusic',['assets/BackgroundMusic2.mp3']);
         this.load.audio('FurfurMusic',['assets/FurfurMusic.mp3']);
         this.load.audio('pickUp',['assets/PickUp_1.wav']);
+        this.load.audio('ironSFX',['assets/ironSFX.wav']);
         this.load.image('iron', 'assets/iron.png');
         this.load.image('bigStump', 'assets/bigStump.png');
         this.load.image('dirt', 'assets/dirtPatch.png');
@@ -61,6 +62,8 @@ class Scene1_2 extends Phaser.Scene
         //sound effects
         pickUpSFX = this.sound.add('pickUp');
         pickUpSFX.setVolume(.50);
+        ironSFX = this.sound.add('ironSFX');
+        ironSFX.setVolume(2);
 
         // add trees
         trees = this.physics.add.staticGroup();
@@ -315,7 +318,7 @@ class Scene1_2 extends Phaser.Scene
     pickUpPiece(player, puzzlePieces)
     {
         puzzlePieces.destroy();
-        pickUpSFX.play();
+        ironSFX.play();
         collectedPieces++;
         itemCollected2 = true;
         if (collectedPieces >= 3)
