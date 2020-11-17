@@ -39,7 +39,10 @@ var itemCollected2 = false;
 var itemCollected3 = false;
 var orbCollected = false;
 var sigilOn = false;
+var instrGuide;
 var candlesOn;
+var talkOn;
+var textbox;
 
 class Scene1 extends Phaser.Scene
 {
@@ -211,6 +214,20 @@ class Scene1 extends Phaser.Scene
           sigil.setFrame(37);
         }
 
+        // spirit guide animations
+        instrGuide = this.physics.add.sprite(150, 150, 'guide').setScale(1.7);
+
+        this.anims.create({
+          key: 'idle',
+          frames: this.anims.generateFrameNumbers('guide', { start: 0, end: 3 }),
+          frameRate: 8,
+          repeat: -1
+        });
+
+        instrGuide.anims.play('idle', true);
+        textbox = this.add.text(120,70," ",{fontFamily:'Comic Sans',fontSize:30,fill:"#000000", backgroundColor:"#ffffff",});
+
+
         // The player and its settings
         player = this.physics.add.sprite(this.playerSpawnX, this.playerSpawnY, 'dude');
 
@@ -270,17 +287,6 @@ class Scene1 extends Phaser.Scene
             repeat: -1
         });
 
-        // spirit guide animations
-        var instrGuide = this.physics.add.sprite(150, 150, 'guide').setScale(1.7);
-
-        this.anims.create({
-          key: 'idle',
-          frames: this.anims.generateFrameNumbers('guide', { start: 0, end: 3 }),
-          frameRate: 8,
-          repeat: -1
-        });
-
-    instrGuide.anims.play('idle', true);
         //  Input Events
         cursors = this.input.keyboard.createCursorKeys();
         wasd = this.input.keyboard.addKeys(
@@ -426,7 +432,7 @@ class Scene1 extends Phaser.Scene
         playerY = player.y;
 
         movePlayer();
-
+        this.guideDialouge();
         moveFurfur();
 
         if (space.use.isDown && numOrbs != 0)
@@ -554,6 +560,27 @@ class Scene1 extends Phaser.Scene
       sigil = this.add.sprite(400,300,'sigil');
       sigil.setScale(.75)
       sigil.anims.play('sigil_on', false);
+    }
+
+    guideDialouge()
+    {
+      var textOptions = ["Quickly! You must find all \n3 pieces in order to escape!", "1", "2", "3"]
+      if((player.x - instrGuide.x < 100) && (Math.abs(player.y - instrGuide.y) < 100))
+      {
+        talkOn = true;
+      }
+      else{
+        talkOn = false;
+      }
+        
+      if(talkOn)
+      {
+        textbox.setVisible(true);
+        textbox.setText(textOptions[collectedPieces]);
+      }
+      else{
+        textbox.setVisible(false);
+      }
     }
 };
 
