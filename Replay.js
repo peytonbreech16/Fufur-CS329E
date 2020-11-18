@@ -1,4 +1,5 @@
 var playAgain2
+var evilLaugh
 
 class Replay extends Phaser.Scene{
   constructor(){
@@ -12,10 +13,14 @@ class Replay extends Phaser.Scene{
     this.load.image('back4', 'assets/background4.png');
     this.load.image('back5', 'assets/background5.png');
     this.load.image('back6', 'assets/background6.png');
+    this.load.audio('evilLaugh',['assets/evilLaugh.mp3']);
   }
 
   create(){
 
+    //furfur laugh sfx
+    evilLaugh = this.sound.add('evilLaugh');
+    evilLaugh.play();
     var back1 = this.add.image(400,300,'back1');
     back1.displayWidth = game.config.width * 1;
     back1.scaleY = back1.scaleX;
