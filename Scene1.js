@@ -564,7 +564,7 @@ class Scene1 extends Phaser.Scene
 
     guideDialouge()
     {
-      var textOptions = ["Quickly! You must find all \n3 pieces in order to escape!", "1", "2", "3"]
+      var textOptions = ["Quickly! You must find all \n3 pieces in order to escape!", "Try exploring a different path!", "Only 1 more piece remains!", "Great job!"]
       if((player.x - instrGuide.x < 100) && (Math.abs(player.y - instrGuide.y) < 100))
       {
         talkOn = true;
