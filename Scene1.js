@@ -460,7 +460,7 @@ class Scene1 extends Phaser.Scene
           var candle3 = this.add.sprite(500,200,'candleOn');
           var candle4 = this.add.sprite(500,400,'candleOn');
           this.anims.staggerPlay('candles_on',[candle1,candle2,candle3,candle4],500,false);
-          
+
           this.time.addEvent({
             delay: 1500,
             callback: () =>{
@@ -572,7 +572,7 @@ class Scene1 extends Phaser.Scene
       else{
         talkOn = false;
       }
-        
+
       if(talkOn)
       {
         textbox.setVisible(true);
@@ -628,57 +628,57 @@ function moveFurfur()
         // furfur movement
         if ((furfur.x < player.x-2) && (furfur.y < player.y-2))
         {
-            furfur.x += 2;
-            furfur.y += 2;
+            furfur.x += 2.3;
+            furfur.y += 2.3;
             furfur.anims.play('furfur_right', true);
             furfur.flipX = false;
         }
 
-        else if ((furfur.x < player.x-2) && (furfur.y > player.y-2))
+        else if ((furfur.x <= player.x-2) && (furfur.y > player.y-2))
         {
-            furfur.x += 2;
-            furfur.y -= 2;
+            furfur.x += 2.3;
+            furfur.y -= 2.3;
             furfur.anims.play('furfur_right', true);
             furfur.flipX = false;
         }
 
         else if ((furfur.x > player.x-2) && (furfur.y > player.y-2))
         {
-            furfur.x -= 2;
-            furfur.y -= 2;
+            furfur.x -= 2.3;
+            furfur.y -= 2.3;
             furfur.anims.play('furfur_left', true);
             furfur.flipX = true;
         }
 
         else if ((furfur.x > player.x-2) && (furfur.y < player.y-2))
         {
-            furfur.x -= 2;
-            furfur.y += 2;
+            furfur.x -= 2.3;
+            furfur.y += 2.3;
             furfur.anims.play('furfur_left', true);
             furfur.flipX = true;
         }
 
-        else if (furfur.y >= player.y+2)
+        else if (furfur.y == player.y+2)
         {
-            furfur.y -= 2;
+            furfur.y -= 2.3;
             furfur.anims.play('furfur_up', true);
         }
-        else if (furfur.y < player.y-2)
+        else if (furfur.y == player.y-2)
         {
-            furfur.y += 2;
+            furfur.y += 2.3;
             furfur.anims.play('furfur_down', true);
         }
 
         else if (furfur.x >= player.x+2)
         {
-            furfur.x -= 2;
+            furfur.x -= 2.3;
             furfur.anims.play('furfur_left', true);
             furfur.flipX = true;
         }
 
         else if (furfur.x < player.x-2)
         {
-            furfur.x += 2;
+            furfur.x += 2.3;
             furfur.anims.play('furfur_right', true);
             furfur.flipX = false;
         }

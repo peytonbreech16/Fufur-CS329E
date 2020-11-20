@@ -199,7 +199,7 @@ class Scene2_3 extends Phaser.Scene
         // furfur is chasing player
         if (furfurSpawned && roomsTraversed < 3){
             this.time.addEvent({
-              delay: 1000,
+              delay: 1250,
 
               // spawn furfur
               callback: () =>{
