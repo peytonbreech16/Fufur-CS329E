@@ -260,6 +260,10 @@ class Scene3_2 extends Phaser.Scene
 
         // orbs that grant furfur immunity
         orbs = this.physics.add.staticGroup();
+        if (!orbCollected)
+        {
+          orbs.create(620,155,'orb');
+        }
 
         //Player touching orbs
         this.physics.add.overlap(player, orbs, this.pickUpOrb, null, this);
@@ -341,6 +345,7 @@ class Scene3_2 extends Phaser.Scene
       orbs.destroy();
       pickUpSFX.play();
       numOrbs++;
+      orbCollected = true;
       orbText.setText('Orbs: ' + numOrbs);
     }
 

@@ -42,7 +42,9 @@ var sigilOn = false;
 var instrGuide;
 var candlesOn;
 var talkOn;
+var talkedOnce = false;
 var textbox;
+var enter;
 
 class Scene1 extends Phaser.Scene
 {
@@ -225,8 +227,29 @@ class Scene1 extends Phaser.Scene
         });
 
         instrGuide.anims.play('idle', true);
-        textbox = this.add.text(120,70," ",{fontFamily:'Comic Sans',fontSize:30,fill:"#000000", backgroundColor:"#ffffff",});
+        textbox = this.add.text(120,70," ",{fontFamily:'Headache',fontSize:20,fill:"#000000", backgroundColor:"#856f6f",});
+        enter = this.input.keyboard.addKey('ENTER');
 
+        var textOptions = ["Quickly! You must find all \n3 pieces in order to escape!\nReturn when you have them all!",
+                          "Avoid getting yourself trapped in dead ends!",
+                          "Try exploring a different path!",
+                          "I will set the sealing circle!"]
+
+        this.input.keyboard.on('keydown-' + 'ENTER', function(){
+          if (talkOn == true && talkedOnce == false){
+            textbox.setVisible(true);
+            textbox.setText("Here is a spirit orb. Use it when\nyou're in tricky situations by\npressing the spacebar");
+            talkedOnce = true;
+            pickUpSFX.play();
+            numOrbs += 1;
+            orbText.setText('Orbs: ' + numOrbs);
+          }
+
+          else if (talkOn == true && talkedOnce == true){
+            textbox.setVisible(true);
+            textbox.setText(textOptions[collectedPieces])
+          }
+        });
 
         // The player and its settings
         player = this.physics.add.sprite(this.playerSpawnX, this.playerSpawnY, 'dude');
@@ -338,8 +361,16 @@ class Scene1 extends Phaser.Scene
         this.physics.add.existing(rightBorder);
         this.physics.add.overlap(player, rightBorder, this.moveRoomRight, null, this);
 
+        // player has all pieces so furfur stops chasing player
+        if (furfurSpawned && collectedPieces == 3){
+          roomsTraversed = 0;
+          furfurSpawned = false;
+          furfurMusic.stop();
+          backgroundMusic.play();
+        }
+
         // furfur is chasing player
-        if (furfurSpawned && roomsTraversed < 3){
+        else if (furfurSpawned && roomsTraversed < 3){
           this.time.addEvent({
             delay: 1000,
 
@@ -357,6 +388,7 @@ class Scene1 extends Phaser.Scene
           });
           roomsTraversed = roomsTraversed + 1;
         }
+        // furfur stops chasing player
         else if (furfurSpawned && roomsTraversed == 3){
           roomsTraversed = 0;
           furfurSpawned = false;
@@ -395,16 +427,6 @@ class Scene1 extends Phaser.Scene
             },
           });
         }
-
-        // orbs that grant furfur immunity
-        orbs = this.physics.add.staticGroup();
-        if (!orbCollected)
-        {
-          orbs.create(300,150,'orb');
-        }
-
-        //Player touching orbs
-        this.physics.add.overlap(player, orbs, this.pickUpOrb, null, this);
 
         //Text for showing how many orbs player can use
         orbText = this.add.text(20, 40, 'Orbs: ' + numOrbs, {fontFamily: 'Headache', fontSize: 22, fill: '#ff0' });
@@ -564,24 +586,15 @@ class Scene1 extends Phaser.Scene
 
     guideDialouge()
     {
-      var textOptions = ["Quickly! You must find all \n3 pieces in order to escape!", "Try exploring a different path!", "Only 1 more piece remains!", "Great job!"]
       if((player.x - instrGuide.x < 100) && (Math.abs(player.y - instrGuide.y) < 100))
       {
         talkOn = true;
       }
       else{
         talkOn = false;
-      }
-
-      if(talkOn)
-      {
-        textbox.setVisible(true);
-        textbox.setText(textOptions[collectedPieces]);
-      }
-      else{
         textbox.setVisible(false);
       }
-    }
+    };
 };
 
 
