@@ -42,8 +42,9 @@ var sigilOn = false;
 var instrGuide;
 var candlesOn;
 var talkOn;
-var talkedOnce = false;
+var timesTalked = 0; // number of times player has talked to guide
 var textbox;
+var textbox2;
 var enter;
 
 class Scene1 extends Phaser.Scene
@@ -228,31 +229,49 @@ class Scene1 extends Phaser.Scene
 
         instrGuide.anims.play('idle', true);
         textbox = this.add.text(120,70," ",{fontFamily:'Headache',fontSize:20,fill:"#000000", backgroundColor:"#856f6f",});
+        textbox2 = this.add.text(483,130,"(ENTER)",{fontFamily:'Headache',fontSize:16,fill:"#000000", backgroundColor:"#856f6f",});
         enter = this.input.keyboard.addKey('ENTER');
 
-        var textOptions = ["Quickly! You must find all \n3 pieces in order to escape!\nReturn when you have them all!",
+        var textOptions = ["Move quickly through rooms to avoid Furfur!",
                           "Avoid getting yourself trapped in dead ends!",
                           "Try exploring a different path!",
                           "I will set the sealing circle!"]
 
         this.input.keyboard.on('keydown-' + 'ENTER', function(){
-          if (talkOn == true && talkedOnce == false){
+          if (talkOn == true && timesTalked == 0){
             textbox.setVisible(true);
+            textbox.setText("Quickly! You must find all 3 pieces\nin order to escape! Return when you\nhave them all!");
+            textbox2.setVisible(true);
+            timesTalked += 1;
+          }
+
+          else if(talkOn == true && timesTalked == 1){
+            textbox.setVisible(true);
+            textbox2.setVisible(false);
             textbox.setText("Here is a spirit orb. Use it when\nyou're in tricky situations by\npressing the spacebar");
-            talkedOnce = true;
+            timesTalked += 1;
             pickUpSFX.play();
             numOrbs += 1;
             orbText.setText('Orbs: ' + numOrbs);
           }
 
-          else if (talkOn == true && talkedOnce == true){
+          else if (talkOn == true && timesTalked >= 2){
             textbox.setVisible(true);
+            textbox2.setVisible(false);
             textbox.setText(textOptions[collectedPieces])
+            timesTalked += 1;
           }
         });
 
         // The player and its settings
         player = this.physics.add.sprite(this.playerSpawnX, this.playerSpawnY, 'dude');
+
+        // The spirit guide hitbox
+        var guideHitbox = this.physics.add.staticGroup();
+        var guideHitbox1 = guideHitbox.create(instrGuide.x-15, instrGuide.y-5, 'hitbox');
+        guideHitbox1.setScale(1.2);
+        guideHitbox.setVisible(false);
+        this.physics.add.collider(player, guideHitbox1);
 
         //The enemy (furfur) and its settings
         furfur = this.physics.add.sprite(100, 530, 'furfur');
@@ -465,7 +484,8 @@ class Scene1 extends Phaser.Scene
         if (isProtected && !protTimerOn){
           numOrbs -= 1;
           protTimerOn = true;
-          protTimeCounter = setInterval(protTimer, 1000); // countdown e
+          orbText.setText('Orbs: ' + numOrbs);
+          protTimeCounter = setInterval(protTimer, 1000); // countdown
         }
 
         if (isProtected){
@@ -593,6 +613,7 @@ class Scene1 extends Phaser.Scene
       else{
         talkOn = false;
         textbox.setVisible(false);
+        textbox2.setVisible(false);
       }
     };
 };

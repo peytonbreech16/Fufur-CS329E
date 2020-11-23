@@ -273,13 +273,6 @@ class Scene1_2 extends Phaser.Scene
 
         moveFurfur();
 
-        // if (isProtected){
-        //   protection.setActive(true).setVisible(true);
-        //   protection.anims.play('on', true);
-        //   moveProtection();
-        //   furfur.body.enable = false;
-        // }
-
         if (space.use.isDown && numOrbs != 0)
         {
           isProtected = true;
@@ -288,7 +281,8 @@ class Scene1_2 extends Phaser.Scene
         if (isProtected && !protTimerOn){
           numOrbs -= 1;
           protTimerOn = true;
-          protTimeCounter = setInterval(protTimer, 1000); // countdown e
+          orbText.setText('Orbs: ' + numOrbs);
+          protTimeCounter = setInterval(protTimer, 1000); // countdown
         }
 
         if (isProtected){

@@ -300,7 +300,8 @@ class Scene0_3 extends Phaser.Scene
         if (isProtected && !protTimerOn){
           numOrbs -= 1;
           protTimerOn = true;
-          protTimeCounter = setInterval(protTimer, 1000); // countdown e
+          orbText.setText('Orbs: ' + numOrbs);
+          protTimeCounter = setInterval(protTimer, 1000); // countdown
         }
 
         if (isProtected){
