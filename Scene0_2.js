@@ -135,7 +135,7 @@ class Scene0_2 extends Phaser.Scene
         //puzzle pieces
         if (!itemCollected1)
         {
-          puzzlePieces.create(625,365,'salt');
+          puzzlePieces.create(625,365,'salt').setScale(1.5);
         }
 
         // The player and its settings

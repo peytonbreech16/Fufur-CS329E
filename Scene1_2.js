@@ -133,7 +133,7 @@ class Scene1_2 extends Phaser.Scene
         //puzzle pieces
         if (!itemCollected2)
         {
-          puzzlePieces.create(600,200,'iron');
+          puzzlePieces.create(600,200,'iron').setScale(1.5);
         }
 
 
