@@ -169,19 +169,19 @@ class Scene2_2 extends Phaser.Scene
             right:Phaser.Input.Keyboard.KeyCodes.D});
 
         // room change objects
-        topBorder = this.add.rectangle(400,0,200,25, 0xFF0000);
+        topBorder = this.add.rectangle(400,0,200,25, 0xfcf488,.4);
         this.physics.add.existing(topBorder);
         this.physics.add.overlap(player, topBorder, this.moveRoomUp, null, this);
 
-        bottomBorder = this.add.rectangle(350,600,325,25, 0xFF0000);
+        bottomBorder = this.add.rectangle(350,600,325,25, 0xfcf488,.4);
         this.physics.add.existing(bottomBorder);
         this.physics.add.overlap(player, bottomBorder, this.moveRoomDown, null, this);
 
-        leftBorder = this.add.rectangle(0,275,25,300, 0xFF0000);
+        leftBorder = this.add.rectangle(0,275,25,300, 0xfcf488,.4);
         this.physics.add.existing(leftBorder);
         this.physics.add.overlap(player, leftBorder, this.moveRoomLeft, null, this);
 
-        rightBorder = this.add.rectangle(800, 250, 25, 300, 0xFF0000);
+        rightBorder = this.add.rectangle(800, 250, 25, 300, 0xfcf488,.4);
         this.physics.add.existing(rightBorder);
         this.physics.add.overlap(player, rightBorder, this.moveRoomRight, null, this);
 

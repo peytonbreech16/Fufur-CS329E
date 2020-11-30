@@ -368,15 +368,15 @@ class Scene1 extends Phaser.Scene
 
         // room change objects
 
-        topBorder = this.add.rectangle(400,0,200,25, 0xFF0000);
+        topBorder = this.add.rectangle(400,0,200,25, 0xfcf488,.4);
         this.physics.add.existing(topBorder);
         this.physics.add.overlap(player, topBorder, this.moveRoomUp, null, this);
 
-        bottomBorder = this.add.rectangle(400,600,550,25, 0xFF0000);
+        bottomBorder = this.add.rectangle(400,600,550,25, 0xfcf488,.4);
         this.physics.add.existing(bottomBorder);
         this.physics.add.overlap(player, bottomBorder, this.moveRoomDown, null, this);
 
-        rightBorder = this.add.rectangle(800, 300, 25, 250, 0xFF0000);
+        rightBorder = this.add.rectangle(800, 300, 25, 250, 0xfcf488,.4);
         this.physics.add.existing(rightBorder);
         this.physics.add.overlap(player, rightBorder, this.moveRoomRight, null, this);
 
