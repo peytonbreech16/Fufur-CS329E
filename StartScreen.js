@@ -1,5 +1,6 @@
-var playButton1
-var howToButton
+var playButton1;
+var howToButton;
+var creditsButton;
 
 class StartScreen extends Phaser.Scene{
   constructor(){
@@ -54,6 +55,12 @@ class StartScreen extends Phaser.Scene{
     howToButton.on('pointerdown', function() {
       this.scene.switch('Instructions');
     }, this);
+
+    creditsButton = this.add.text(345,300,'Credits',{fontFamily:'Curse',fontSize:64,fill:"#856f6f"});
+    creditsButton.setInteractive({useHandCursor: true});
+    creditsButton.on('pointerdown', function() {
+      this.scene.switch('Credits');
+    }, this);
   }
 
   update(){
@@ -71,6 +78,14 @@ class StartScreen extends Phaser.Scene{
 
     howToButton.on('pointerout', function() {
       howToButton.clearTint();
+    }, this);
+
+    creditsButton.on('pointerover', function() {
+      creditsButton.setTintFill(0x450000);
+    }, this);
+
+    creditsButton.on('pointerout', function() {
+      creditsButton.clearTint();
     }, this);
   }
 }
